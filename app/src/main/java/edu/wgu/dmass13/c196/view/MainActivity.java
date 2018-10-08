@@ -10,13 +10,20 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import edu.wgu.dmass13.c196.R;
+import edu.wgu.dmass13.c196.model.database.AppDatabase;
 
 public class MainActivity extends AppCompatActivity {
+
+    private AppDatabase database;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        database = AppDatabase.getDatabase(getApplicationContext());
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

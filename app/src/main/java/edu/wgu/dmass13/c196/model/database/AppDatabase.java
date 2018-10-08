@@ -7,7 +7,7 @@ import edu.wgu.dmass13.c196.model.dao.*;
 import edu.wgu.dmass13.c196.model.typeConverter.*;
 
 @Database(entities = {Assessment.class,  Course.class, Mentor.class, Term.class
-}, version = 16, exportSchema = false)
+}, version = 1 , exportSchema = false)
 @TypeConverters({Converters.class})
 public abstract class AppDatabase extends RoomDatabase {
 
@@ -18,7 +18,7 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract MentorDAO mentorDAO();
     public abstract TermDAO termDAO();
 
-    public static AppDatabase getDatabase(Context context) {
+    public synchronized static AppDatabase getDatabase(Context context) {
         if (INSTANCE == null) {
             INSTANCE =
                     Room.databaseBuilder(context, AppDatabase.class, "C196")
