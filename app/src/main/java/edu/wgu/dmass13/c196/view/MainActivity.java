@@ -1,6 +1,8 @@
 package edu.wgu.dmass13.c196.view;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -11,14 +13,21 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.List;
+import java.util.Observer;
+
 import edu.wgu.dmass13.c196.R;
 import edu.wgu.dmass13.c196.model.database.AppDatabase;
+import edu.wgu.dmass13.c196.model.entity.Mentor;
 import edu.wgu.dmass13.c196.view.components.MentorListAdapter;
+import edu.wgu.dmass13.c196.viewmodel.MentorViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
     private AppDatabase database;
+    private MentorViewModel _MentorViewModel;
 
+    public static final int NEW_MENTOR_ACTIVITY_REQUEST_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +39,16 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        _MentorViewModel = ViewModelProviders.of(this).get(MentorViewModel.class);
+
+        _MentorViewModel.getAllMentors().observe(this, new Observer<List<Mentor>>() {
+            @Override
+            public void onChanged(@Nullable final List<Mentor> words) {
+                // Update the cached copy of the words in the adapter.
+                adapter.setWords(words);
+            }
+        });
+
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
 
         final MentorListAdapter adapter = new MentorListAdapter(this);
@@ -40,8 +59,8 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(MainActivity.this, NewMentorActivity.class);
+                startActivityForResult(intent, NEW_MENTOR_ACTIVITY_REQUEST_CODE);
             }
         });
     }

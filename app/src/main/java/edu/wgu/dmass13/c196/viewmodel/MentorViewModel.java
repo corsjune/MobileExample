@@ -1,7 +1,7 @@
 package edu.wgu.dmass13.c196.viewmodel;
 
 import android.app.Application;
-import android.arch.lifecycle.AndroidViewModel;
+import android.arch.lifecycle.extensions.*;
 import android.arch.lifecycle.LiveData;
 
 import java.util.List;
@@ -21,7 +21,7 @@ public class MentorViewModel extends AndroidViewModel {
         _allMentors = _repository.getAllMentors();
     }
 
-    LiveData<List<Mentor>> getAllMentors() {
+    public LiveData<List<Mentor>> getAllMentors() {
         return _allMentors;
     }
 
