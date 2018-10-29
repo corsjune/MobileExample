@@ -38,10 +38,11 @@ public class MentorListAdapter extends RecyclerView.Adapter<MentorListAdapter.Me
         }
     }
 
-    void setMentor(List<Mentor> mentor) {
+    public void setMentor(List<Mentor> mentor) {
         _mentors = mentor;
         notifyDataSetChanged();
     }
+
 
     // getItemCount() is called many times, and when it is first called,
     // mWords has not been updated (means initially, it's null, and we can't return null).
@@ -52,7 +53,8 @@ public class MentorListAdapter extends RecyclerView.Adapter<MentorListAdapter.Me
         else return 0;
     }
 
-    class MentorViewHolder extends RecyclerView.ViewHolder {
+
+    public class MentorViewHolder extends RecyclerView.ViewHolder {
         private final TextView mentorItemView;
 
         private MentorViewHolder(View itemView) {

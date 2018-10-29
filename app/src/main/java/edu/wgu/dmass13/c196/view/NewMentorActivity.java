@@ -8,11 +8,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.io.Serializable;
+
 import edu.wgu.dmass13.c196.R;
+import edu.wgu.dmass13.c196.model.entity.Mentor;
 
 public class NewMentorActivity extends AppCompatActivity {
 
-    public static final String EXTRA_REPLY = "com.example.android.wordlistsql.REPLY";
+    public static final String CURRENT_MENTOR = "edu.wgu.dmass13.c196.CurrentMentor";
 
     private EditText mEditWordView;
 
@@ -29,8 +32,14 @@ public class NewMentorActivity extends AppCompatActivity {
                 if (TextUtils.isEmpty(mEditWordView.getText())) {
                     setResult(RESULT_CANCELED, replyIntent);
                 } else {
-                    String word = mEditWordView.getText().toString();
-                    replyIntent.putExtra(EXTRA_REPLY, word);
+
+                    Mentor newMentor = new Mentor();
+                    newMentor.Name = mEditWordView.getText().toString();
+
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable(CURRENT_MENTOR, (Serializable) newMentor);
+                    replyIntent.putExtras(bundle);
+
                     setResult(RESULT_OK, replyIntent);
                 }
                 finish();

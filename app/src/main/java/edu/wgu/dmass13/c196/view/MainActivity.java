@@ -1,5 +1,7 @@
 package edu.wgu.dmass13.c196.view;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,9 +14,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.util.List;
-import java.util.Observer;
 
 import edu.wgu.dmass13.c196.R;
 import edu.wgu.dmass13.c196.model.database.AppDatabase;
@@ -39,21 +41,27 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        RecyclerView recyclerView = findViewById(R.id.recyclerview);
+
+        final MentorListAdapter adapter = new MentorListAdapter(this);
+
+
         _MentorViewModel = ViewModelProviders.of(this).get(MentorViewModel.class);
 
         _MentorViewModel.getAllMentors().observe(this, new Observer<List<Mentor>>() {
             @Override
-            public void onChanged(@Nullable final List<Mentor> words) {
+            public void onChanged(@Nullable final List<Mentor> mentors) {
                 // Update the cached copy of the words in the adapter.
-                adapter.setWords(words);
+                adapter.setMentor(mentors);
             }
+
         });
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerview);
-
-        final MentorListAdapter adapter = new MentorListAdapter(this);
         recyclerView.setAdapter(adapter);
+        recyclerView.setHasFixedSize(true);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -63,6 +71,23 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent, NEW_MENTOR_ACTIVITY_REQUEST_CODE);
             }
         });
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == NEW_MENTOR_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
+
+            Bundle bundle = data.getExtras();
+            Mentor mentor = (Mentor) bundle.getSerializable(NewMentorActivity.CURRENT_MENTOR);
+
+            _MentorViewModel.insert(mentor);
+        } else {
+            Toast.makeText(
+                    getApplicationContext(),
+                    R.string.empty_not_saved,
+                    Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
