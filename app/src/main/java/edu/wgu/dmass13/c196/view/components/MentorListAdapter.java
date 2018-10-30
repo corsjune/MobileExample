@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -13,6 +14,18 @@ import edu.wgu.dmass13.c196.R;
 import edu.wgu.dmass13.c196.model.entity.Mentor;
 
 public class MentorListAdapter extends RecyclerView.Adapter<MentorListAdapter.MentorViewHolder> {
+
+
+    // Define listener member variable
+    private OnItemClickListener listener;
+    // Define the listener interface
+    public interface OnItemClickListener {
+        void onItemClick(View itemView, Mentor mentor);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
 
     private final LayoutInflater _inflater;
     private List<Mentor> _mentors; // Cached copy of words
@@ -31,10 +44,10 @@ public class MentorListAdapter extends RecyclerView.Adapter<MentorListAdapter.Me
     public void onBindViewHolder(MentorViewHolder holder, int position) {
         if (_mentors != null) {
             Mentor current = _mentors.get(position);
-            holder.mentorItemView.setText(current.Name);
+            holder._mentorItemView.setText(current.Name);
         } else {
             // Covers the case of data not being ready yet.
-            holder.mentorItemView.setText("No Mentor");
+            holder._mentorItemView.setText("No Mentor");
         }
     }
 
@@ -54,12 +67,27 @@ public class MentorListAdapter extends RecyclerView.Adapter<MentorListAdapter.Me
     }
 
 
-    public class MentorViewHolder extends RecyclerView.ViewHolder {
-        private final TextView mentorItemView;
+    public class MentorViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        private final TextView _mentorItemView;
 
-        private MentorViewHolder(View itemView) {
+        private MentorViewHolder(final View itemView) {
             super(itemView);
-            mentorItemView = itemView.findViewById(R.id.textView);
+            _mentorItemView = itemView.findViewById(R.id.textView);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            // Triggers click upwards to the adapter on click
+            if (listener != null) {
+                int position = getAdapterPosition();
+
+                Mentor  x = _mentors.get(position);
+
+                if (position != RecyclerView.NO_POSITION) {
+                    listener.onItemClick(itemView, x);
+                }
+            }
         }
     }
 }

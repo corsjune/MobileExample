@@ -45,6 +45,12 @@ public class MainActivity extends AppCompatActivity {
 
         final MentorListAdapter adapter = new MentorListAdapter(this);
 
+        adapter.setOnItemClickListener(new MentorListAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, Mentor mentor) {
+                Toast.makeText(MainActivity.this, mentor.Name + " was clicked!", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         _MentorViewModel = ViewModelProviders.of(this).get(MentorViewModel.class);
 
