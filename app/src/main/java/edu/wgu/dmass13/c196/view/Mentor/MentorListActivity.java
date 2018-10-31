@@ -1,4 +1,4 @@
-package edu.wgu.dmass13.c196.view;
+package edu.wgu.dmass13.c196.view.mentor;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -21,10 +20,10 @@ import java.util.List;
 import edu.wgu.dmass13.c196.R;
 import edu.wgu.dmass13.c196.model.database.AppDatabase;
 import edu.wgu.dmass13.c196.model.entity.Mentor;
-import edu.wgu.dmass13.c196.view.components.MentorListAdapter;
+import edu.wgu.dmass13.c196.view.mentor.components.MentorListAdapter;
 import edu.wgu.dmass13.c196.viewmodel.MentorViewModel;
 
-public class MainActivity extends AppCompatActivity {
+public class MentorListActivity extends AppCompatActivity {
 
     private AppDatabase database;
     private MentorViewModel _MentorViewModel;
@@ -48,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         adapter.setOnItemClickListener(new MentorListAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, Mentor mentor) {
-                Toast.makeText(MainActivity.this, mentor.Name + " was clicked!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MentorListActivity.this, mentor.Name + " was clicked!", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -73,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, NewMentorActivity.class);
+                Intent intent = new Intent(MentorListActivity.this, MentorEditActivity.class);
                 startActivityForResult(intent, NEW_MENTOR_ACTIVITY_REQUEST_CODE);
             }
         });
@@ -85,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == NEW_MENTOR_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
 
             Bundle bundle = data.getExtras();
-            Mentor mentor = (Mentor) bundle.getSerializable(NewMentorActivity.CURRENT_MENTOR);
+            Mentor mentor = (Mentor) bundle.getSerializable(MentorEditActivity.CURRENT_MENTOR);
 
             _MentorViewModel.insert(mentor);
         } else {

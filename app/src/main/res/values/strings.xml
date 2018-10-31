@@ -20,4 +20,5 @@
     <string name="hint_word">Mentor...</string>
     <string name="button_save">Save</string>
     <string name="empty_not_saved">Mentor not saved because it is empty.</string>
+    <string name="title_activity_home">WGU 196</string>
 </resources>

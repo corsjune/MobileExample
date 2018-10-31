@@ -10,7 +10,7 @@ import edu.wgu.dmass13.c196.utilities.StringUtility;
 public class Mentor implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
-    public long mentorID;
+    public Long MentorID = null;
 
     public String Name;
 

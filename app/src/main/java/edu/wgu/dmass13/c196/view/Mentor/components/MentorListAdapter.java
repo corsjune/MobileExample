@@ -1,4 +1,4 @@
-package edu.wgu.dmass13.c196.view.components;
+package edu.wgu.dmass13.c196.view.mentor.components;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
