@@ -1,4 +1,4 @@
-package edu.wgu.dmass13.c196.view.mentor;
+package edu.wgu.dmass13.c196.view.sample;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;

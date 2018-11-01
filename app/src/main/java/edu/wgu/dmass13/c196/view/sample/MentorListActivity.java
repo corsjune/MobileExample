@@ -1,4 +1,4 @@
-package edu.wgu.dmass13.c196.view.mentor;
+package edu.wgu.dmass13.c196.view.sample;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
@@ -20,7 +20,7 @@ import java.util.List;
 import edu.wgu.dmass13.c196.R;
 import edu.wgu.dmass13.c196.model.database.AppDatabase;
 import edu.wgu.dmass13.c196.model.entity.Mentor;
-import edu.wgu.dmass13.c196.view.mentor.components.MentorListAdapter;
+import edu.wgu.dmass13.c196.view.sample.components.MentorListAdapter;
 import edu.wgu.dmass13.c196.viewmodel.MentorViewModel;
 
 public class MentorListActivity extends AppCompatActivity {

@@ -4,13 +4,18 @@ import edu.wgu.dmass13.c196.globals.Enums;
 import android.arch.persistence.room.*;
 
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 public class Assessment implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
-    public long AssessmentID;
+    public Long AssessmentID = null;
 
     public Enums.AssessmentType AssessmentType;
+
+    public String Name;
+
+    public Date AssessmentDate;
 
 }

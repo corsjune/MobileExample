@@ -12,7 +12,7 @@ import edu.wgu.dmass13.c196.globals.Enums;
 public class Course implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
-    public long courseID;
+    public Long courseID = null;
 
     public String CourseTitle;
 

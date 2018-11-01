@@ -15,11 +15,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".view.mentor.MentorListActivity"
+            android:name=".view.sample.MentorListActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-        <activity android:name=".view.mentor.MentorEditActivity" />
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".view.sample.MentorEditActivity" />
         <activity
             android:name=".view.HomeActivity"
             android:label="@string/title_activity_home">
@@ -28,6 +27,22 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".view.assessment.Assessment_List"
+            android:label="@string/title_activity_assessment_list"
+            android:parentActivityName=".view.HomeActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.wgu.dmass13.c196.view.HomeActivity" />
+        </activity>
+        <activity
+            android:name=".view.assessment.Assessment_Edit"
+            android:label="@string/title_activity_assessment__edit"
+            android:parentActivityName=".view.assessment.Assessment_List">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.wgu.dmass13.c196.view.assessment.Assessment_List" />
         </activity>
     </application>
 

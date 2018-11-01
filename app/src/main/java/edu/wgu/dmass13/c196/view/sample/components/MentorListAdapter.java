@@ -1,4 +1,4 @@
-package edu.wgu.dmass13.c196.view.mentor.components;
+package edu.wgu.dmass13.c196.view.sample.components;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
