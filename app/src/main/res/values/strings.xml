@@ -25,4 +25,7 @@
     <string name="title_activity_assessment__edit">Assessment_Edit</string>
     <string name="title_activity_course__edit">Course_Edit</string>
     <string name="title_activity_course__list">Course_List</string>
+    <string name="title_activity_mentor_edit">MentorEditActivity</string>
+    <string name="title_activity_mentor_list">MentorListActivity</string>
+    <string name="title_activity_term_list">TermListActivity</string>
 </resources>

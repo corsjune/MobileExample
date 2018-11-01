@@ -1,16 +1,16 @@
-package edu.wgu.dmass13.c196.view.course;
+package edu.wgu.dmass13.c196.view.assessment;
 
 import android.os.Bundle;
 import android.app.Activity;
 
 import edu.wgu.dmass13.c196.R;
 
-public class Course_Edit extends Activity {
+public class AssessmentEditActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_course__edit);
+        setContentView(R.layout.activity_assessment_edit);
         getActionBar().setDisplayHomeAsUpEnabled(true);
     }
 

@@ -29,7 +29,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.assessment.Assessment_List"
+            android:name=".view.assessment.AssessmentListActivity"
             android:label="@string/title_activity_assessment_list"
             android:parentActivityName=".view.HomeActivity">
             <meta-data
@@ -37,15 +37,15 @@
                 android:value="edu.wgu.dmass13.c196.view.HomeActivity" />
         </activity>
         <activity
-            android:name=".view.assessment.Assessment_Edit"
+            android:name=".view.assessment.AssessmentEditActivity"
             android:label="@string/title_activity_assessment__edit"
-            android:parentActivityName=".view.assessment.Assessment_List">
+            android:parentActivityName=".view.assessment.AssessmentListActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="edu.wgu.dmass13.c196.view.assessment.Assessment_List" />
+                android:value="edu.wgu.dmass13.c196.view.assessment.AssessmentListActivity" />
         </activity>
         <activity
-            android:name=".view.course.Course_Edit"
+            android:name=".view.course.CourseEditActivity"
             android:label="@string/title_activity_course__edit"
             android:parentActivityName=".view.HomeActivity">
             <meta-data
@@ -53,13 +53,22 @@
                 android:value="edu.wgu.dmass13.c196.view.HomeActivity" />
         </activity>
         <activity
-            android:name=".view.course.Course_List"
+            android:name=".view.course.CourseListActivity"
             android:label="@string/title_activity_course__list"
             android:parentActivityName=".view.HomeActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="edu.wgu.dmass13.c196.view.HomeActivity" />
         </activity>
+        <activity
+            android:name=".view.mentor.MentorEditActivity"
+            android:label="@string/title_activity_mentor_edit" />
+        <activity
+            android:name=".view.mentor.MentorListActivity"
+            android:label="@string/title_activity_mentor_list" />
+        <activity
+            android:name=".view.term.TermListActivity"
+            android:label="@string/title_activity_term_list"></activity>
     </application>
 
 </manifest>
