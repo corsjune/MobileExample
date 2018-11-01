@@ -23,4 +23,6 @@
     <string name="title_activity_home">WGU 196</string>
     <string name="title_activity_assessment_list">Assessment_list</string>
     <string name="title_activity_assessment__edit">Assessment_Edit</string>
+    <string name="title_activity_course__edit">Course_Edit</string>
+    <string name="title_activity_course__list">Course_List</string>
 </resources>

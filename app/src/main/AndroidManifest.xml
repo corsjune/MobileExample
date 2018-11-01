@@ -44,6 +44,22 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="edu.wgu.dmass13.c196.view.assessment.Assessment_List" />
         </activity>
+        <activity
+            android:name=".view.course.Course_Edit"
+            android:label="@string/title_activity_course__edit"
+            android:parentActivityName=".view.HomeActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.wgu.dmass13.c196.view.HomeActivity" />
+        </activity>
+        <activity
+            android:name=".view.course.Course_List"
+            android:label="@string/title_activity_course__list"
+            android:parentActivityName=".view.HomeActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.wgu.dmass13.c196.view.HomeActivity" />
+        </activity>
     </application>
 
 </manifest>
