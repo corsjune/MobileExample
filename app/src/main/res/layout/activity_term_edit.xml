@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-light"
-        android:hint="@string/mentor_hint_word"
+        android:hint="@string/term_hint_word"
         android:inputType="textAutoComplete"
         android:padding="@dimen/small_padding"
         android:layout_marginBottom="@dimen/big_padding"
