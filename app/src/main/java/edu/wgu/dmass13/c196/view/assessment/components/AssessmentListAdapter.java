@@ -10,11 +10,12 @@ import android.widget.TextView;
 import java.util.List;
 
 import edu.wgu.dmass13.c196.R;
+import edu.wgu.dmass13.c196.model.database.AppDatabase;
 import edu.wgu.dmass13.c196.model.entity.Assessment;
 
 public class AssessmentListAdapter extends RecyclerView.Adapter<AssessmentListAdapter.AssessmentViewHolder> {
 
-
+    private AppDatabase database;
     // Define listener member variable
     private OnItemClickListener listener;
 

@@ -10,9 +10,9 @@ import android.widget.TextView;
 import java.util.List;
 
 import edu.wgu.dmass13.c196.R;
-import edu.wgu.dmass13.c196.model.entity.Assessment;
+import edu.wgu.dmass13.c196.model.entity.Term;
 
-public class TermListAdapter extends RecyclerView.Adapter<TermListAdapter.AssessmentViewHolder> {
+public class TermListAdapter extends RecyclerView.Adapter<TermListAdapter.TermViewHolder> {
 
 
     // Define listener member variable
@@ -20,7 +20,7 @@ public class TermListAdapter extends RecyclerView.Adapter<TermListAdapter.Assess
 
     // Define the listener interface
     public interface OnItemClickListener {
-        void onItemClick(View itemView, Assessment assessment);
+        void onItemClick(View itemView, Term assessment);
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
@@ -28,31 +28,31 @@ public class TermListAdapter extends RecyclerView.Adapter<TermListAdapter.Assess
     }
 
     private final LayoutInflater _inflater;
-    private List<Assessment> _assessments; // Cached copy of words
+    private List<Term> _term; // Cached copy of words
 
     public TermListAdapter(Context context) {
         _inflater = LayoutInflater.from(context);
     }
 
     @Override
-    public AssessmentViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public TermViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = _inflater.inflate(R.layout.recyclerview_item, parent, false);
-        return new AssessmentViewHolder(itemView);
+        return new TermViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(AssessmentViewHolder holder, int position) {
-        if (_assessments != null) {
-            Assessment current = _assessments.get(position);
-            holder._assessmentItemView.setText(current.Name);
+    public void onBindViewHolder(TermViewHolder holder, int position) {
+        if (_term != null) {
+            Term current = _term.get(position);
+            holder._termItemView.setText(current.Title);
         } else {
             // Covers the case of data not being ready yet.
-            holder._assessmentItemView.setText("No Assessment");
+            holder._termItemView.setText("No Term");
         }
     }
 
-    public void setAssessment(List<Assessment> assessment) {
-        _assessments = assessment;
+    public void setTerm(List<Term> term) {
+        _term = term;
         notifyDataSetChanged();
     }
 
@@ -61,18 +61,18 @@ public class TermListAdapter extends RecyclerView.Adapter<TermListAdapter.Assess
     // mWords has not been updated (means initially, it's null, and we can't return null).
     @Override
     public int getItemCount() {
-        if (_assessments != null)
-            return _assessments.size();
+        if (_term != null)
+            return _term.size();
         else return 0;
     }
 
 
-    public class AssessmentViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private final TextView _assessmentItemView;
+    public class TermViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        private final TextView _termItemView;
 
-        private AssessmentViewHolder(final View itemView) {
+        private TermViewHolder(final View itemView) {
             super(itemView);
-            _assessmentItemView = itemView.findViewById(R.id.textView);
+            _termItemView = itemView.findViewById(R.id.textView);
             itemView.setOnClickListener(this);
         }
 
@@ -82,7 +82,7 @@ public class TermListAdapter extends RecyclerView.Adapter<TermListAdapter.Assess
             if (listener != null) {
                 int position = getAdapterPosition();
 
-                Assessment x = _assessments.get(position);
+                Term x = _term.get(position);
 
                 if (position != RecyclerView.NO_POSITION) {
                     listener.onItemClick(itemView, x);

@@ -10,9 +10,9 @@ import android.widget.TextView;
 import java.util.List;
 
 import edu.wgu.dmass13.c196.R;
-import edu.wgu.dmass13.c196.model.entity.Assessment;
+import edu.wgu.dmass13.c196.model.entity.Mentor;
 
-public class MentorListAdapter extends RecyclerView.Adapter<MentorListAdapter.AssessmentViewHolder> {
+public class MentorListAdapter extends RecyclerView.Adapter<MentorListAdapter.MentorViewHolder> {
 
 
     // Define listener member variable
@@ -20,7 +20,7 @@ public class MentorListAdapter extends RecyclerView.Adapter<MentorListAdapter.As
 
     // Define the listener interface
     public interface OnItemClickListener {
-        void onItemClick(View itemView, Assessment assessment);
+        void onItemClick(View itemView, Mentor assessment);
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
@@ -28,31 +28,31 @@ public class MentorListAdapter extends RecyclerView.Adapter<MentorListAdapter.As
     }
 
     private final LayoutInflater _inflater;
-    private List<Assessment> _assessments; // Cached copy of words
+    private List<Mentor> _mentor; // Cached copy of words
 
     public MentorListAdapter(Context context) {
         _inflater = LayoutInflater.from(context);
     }
 
     @Override
-    public AssessmentViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MentorViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = _inflater.inflate(R.layout.recyclerview_item, parent, false);
-        return new AssessmentViewHolder(itemView);
+        return new MentorViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(AssessmentViewHolder holder, int position) {
-        if (_assessments != null) {
-            Assessment current = _assessments.get(position);
-            holder._assessmentItemView.setText(current.Name);
+    public void onBindViewHolder(MentorViewHolder holder, int position) {
+        if (_mentor != null) {
+            Mentor current = _mentor.get(position);
+            holder._mentorItemView.setText(current.Name);
         } else {
             // Covers the case of data not being ready yet.
-            holder._assessmentItemView.setText("No Assessment");
+            holder._mentorItemView.setText("No Assessment");
         }
     }
 
-    public void setAssessment(List<Assessment> assessment) {
-        _assessments = assessment;
+    public void setMentor(List<Mentor> mentor) {
+        _mentor = mentor;
         notifyDataSetChanged();
     }
 
@@ -61,18 +61,18 @@ public class MentorListAdapter extends RecyclerView.Adapter<MentorListAdapter.As
     // mWords has not been updated (means initially, it's null, and we can't return null).
     @Override
     public int getItemCount() {
-        if (_assessments != null)
-            return _assessments.size();
+        if (_mentor != null)
+            return _mentor.size();
         else return 0;
     }
 
 
-    public class AssessmentViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private final TextView _assessmentItemView;
+    public class MentorViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        private final TextView _mentorItemView;
 
-        private AssessmentViewHolder(final View itemView) {
+        private MentorViewHolder(final View itemView) {
             super(itemView);
-            _assessmentItemView = itemView.findViewById(R.id.textView);
+            _mentorItemView = itemView.findViewById(R.id.textView);
             itemView.setOnClickListener(this);
         }
 
@@ -82,7 +82,7 @@ public class MentorListAdapter extends RecyclerView.Adapter<MentorListAdapter.As
             if (listener != null) {
                 int position = getAdapterPosition();
 
-                Assessment x = _assessments.get(position);
+                Mentor x = _mentor.get(position);
 
                 if (position != RecyclerView.NO_POSITION) {
                     listener.onItemClick(itemView, x);
