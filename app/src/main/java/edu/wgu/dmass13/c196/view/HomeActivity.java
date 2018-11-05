@@ -26,7 +26,7 @@ public class HomeActivity extends AppCompatActivity {
         // Get a support ActionBar corresponding to this toolbar
         android.support.v7.app.ActionBar ab = getSupportActionBar();
         // Enable the Up button
-        ab.setDisplayHomeAsUpEnabled(true);
+        // ab.setDisplayHomeAsUpEnabled(true);
     }
 
     public void cmdMentors_OnClick(View view) {

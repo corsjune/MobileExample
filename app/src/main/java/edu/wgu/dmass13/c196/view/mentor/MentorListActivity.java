@@ -32,6 +32,11 @@ public class MentorListActivity extends AppCompatActivity {
 
     public static final int NEW_MENTOR_ACTIVITY_REQUEST_CODE = 1;
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +48,7 @@ public class MentorListActivity extends AppCompatActivity {
         android.support.v7.app.ActionBar ab = getSupportActionBar();
         // Enable the Up button
         ab.setDisplayHomeAsUpEnabled(true);
+        ab.setDisplayShowHomeEnabled(true);
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
 

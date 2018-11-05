@@ -24,11 +24,13 @@
     <string name="button_save">Save</string>
     <string name="empty_not_saved">Mentor not saved because it is empty.</string>
     <string name="title_activity_home">WGU 196</string>
-    <string name="title_activity_assessment_list">Assessment_list</string>
-    <string name="title_activity_assessment__edit">Assessment_Edit</string>
-    <string name="title_activity_course__edit">Course_Edit</string>
-    <string name="title_activity_course__list">Course_List</string>
-    <string name="title_activity_mentor_edit">MentorEditActivity</string>
-    <string name="title_activity_mentor_list">MentorListActivity</string>
-    <string name="title_activity_term_list">TermListActivity</string>
+    <string name="title_activity_assessment_list">Assessments</string>
+    <string name="title_activity_assessment__edit">Edit Assessment</string>
+    <string name="title_activity_course__list">Courses</string>
+    <string name="title_activity_course__edit">Edit Course</string>
+    <string name="title_activity_mentor_list">Mentors</string>
+    <string name="title_activity_mentor_edit">Edit Mentor</string>
+    <string name="title_activity_term_list">Terms</string>
+    <string name="title_activity_term_edit">Edit Term</string>
+
 </resources>

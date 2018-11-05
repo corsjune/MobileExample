@@ -30,6 +30,7 @@ public class MentorEditActivity extends AppCompatActivity {
         android.support.v7.app.ActionBar ab = getSupportActionBar();
         // Enable the Up button
         ab.setDisplayHomeAsUpEnabled(true);
+        ab.setDisplayShowHomeEnabled(true);
 
         _MentorEditViewModel = ViewModelProviders.of(this).get(MentorEditViewModel.class);
 

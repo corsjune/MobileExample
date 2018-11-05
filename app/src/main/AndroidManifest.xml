@@ -41,10 +41,10 @@
         <activity
             android:name=".view.course.CourseEditActivity"
             android:label="@string/title_activity_course__edit"
-            android:parentActivityName=".view.HomeActivity">
+            android:parentActivityName=".view.course.CourseListActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="edu.wgu.dmass13.c196.view.HomeActivity" />
+                android:value="edu.wgu.dmass13.c196.view.course.CourseListActivity" />
         </activity>
         <activity
             android:name=".view.course.CourseListActivity"
@@ -56,16 +56,36 @@
         </activity>
         <activity
             android:name=".view.mentor.MentorEditActivity"
-            android:label="@string/title_activity_mentor_edit" />
+            android:label="@string/title_activity_mentor_edit"
+            android:parentActivityName=".view.mentor.MentorListActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.wgu.dmass13.c196.view.mentor.MentorListActivity" />
+        </activity>
         <activity
             android:name=".view.mentor.MentorListActivity"
-            android:label="@string/title_activity_mentor_list" />
+            android:label="@string/title_activity_mentor_list"
+            android:parentActivityName=".view.HomeActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.wgu.dmass13.c196.view.HomeActivity" />
+        </activity>
         <activity
             android:name=".view.term.TermListActivity"
-            android:label="@string/title_activity_term_list"></activity>
+            android:label="@string/title_activity_term_list"
+            android:parentActivityName=".view.assessment.AssessmentListActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.wgu.dmass13.c196.view.HomeActivity" />
+        </activity>
         <activity
             android:name=".view.term.TermEditActivity"
-            android:label="TermEditActivity"></activity>
+            android:label="@string/title_activity_term_edit"
+            android:parentActivityName=".view.term.TermListActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.wgu.dmass13.c196.view.term.TermListActivity" />
+        </activity>
     </application>
 
 </manifest>
