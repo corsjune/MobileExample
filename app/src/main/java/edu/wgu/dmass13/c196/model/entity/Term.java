@@ -12,7 +12,7 @@ import edu.wgu.dmass13.c196.utilities.StringUtility;
 public class Term implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
-    public long termID;
+    public Long TermID;
 
     public String Title;
 

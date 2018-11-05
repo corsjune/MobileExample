@@ -27,5 +27,12 @@ public class Enums {
                 Term_List = 7;
     }
 
+    public class CRUD_Mode {
+        public static final short
+                READ_ONLY = 0,
+                EDIT = 1,
+                CREATE = 2,
+                DELETE = 3;
+    }
 
 }

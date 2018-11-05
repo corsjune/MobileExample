@@ -10,12 +10,11 @@ import android.widget.TextView;
 import java.util.List;
 
 import edu.wgu.dmass13.c196.R;
-import edu.wgu.dmass13.c196.model.database.AppDatabase;
 import edu.wgu.dmass13.c196.model.entity.Assessment;
 
 public class AssessmentListAdapter extends RecyclerView.Adapter<AssessmentListAdapter.AssessmentViewHolder> {
 
-    private AppDatabase database;
+
     // Define listener member variable
     private OnItemClickListener listener;
 
@@ -29,7 +28,7 @@ public class AssessmentListAdapter extends RecyclerView.Adapter<AssessmentListAd
     }
 
     private final LayoutInflater _inflater;
-    private List<Assessment> _assessments; // Cached copy of words
+    private List<Assessment> _assessment; // Cached copy of words
 
     public AssessmentListAdapter(Context context) {
         _inflater = LayoutInflater.from(context);
@@ -43,8 +42,8 @@ public class AssessmentListAdapter extends RecyclerView.Adapter<AssessmentListAd
 
     @Override
     public void onBindViewHolder(AssessmentViewHolder holder, int position) {
-        if (_assessments != null) {
-            Assessment current = _assessments.get(position);
+        if (_assessment != null) {
+            Assessment current = _assessment.get(position);
             holder._assessmentItemView.setText(current.Name);
         } else {
             // Covers the case of data not being ready yet.
@@ -53,7 +52,7 @@ public class AssessmentListAdapter extends RecyclerView.Adapter<AssessmentListAd
     }
 
     public void setAssessment(List<Assessment> assessment) {
-        _assessments = assessment;
+        _assessment = assessment;
         notifyDataSetChanged();
     }
 
@@ -62,8 +61,8 @@ public class AssessmentListAdapter extends RecyclerView.Adapter<AssessmentListAd
     // mWords has not been updated (means initially, it's null, and we can't return null).
     @Override
     public int getItemCount() {
-        if (_assessments != null)
-            return _assessments.size();
+        if (_assessment != null)
+            return _assessment.size();
         else return 0;
     }
 
@@ -77,13 +76,17 @@ public class AssessmentListAdapter extends RecyclerView.Adapter<AssessmentListAd
             itemView.setOnClickListener(this);
         }
 
+        public Assessment getItemAtPosition(int position) {
+            return _assessment.get(position);
+        }
+
         @Override
         public void onClick(View view) {
             // Triggers click upwards to the adapter on click
             if (listener != null) {
                 int position = getAdapterPosition();
 
-                Assessment x = _assessments.get(position);
+                Assessment x = getItemAtPosition(position);
 
                 if (position != RecyclerView.NO_POSITION) {
                     listener.onItemClick(itemView, x);

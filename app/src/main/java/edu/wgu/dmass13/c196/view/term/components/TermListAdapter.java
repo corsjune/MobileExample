@@ -20,7 +20,7 @@ public class TermListAdapter extends RecyclerView.Adapter<TermListAdapter.TermVi
 
     // Define the listener interface
     public interface OnItemClickListener {
-        void onItemClick(View itemView, Term assessment);
+        void onItemClick(View itemView, Term term);
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
@@ -47,7 +47,7 @@ public class TermListAdapter extends RecyclerView.Adapter<TermListAdapter.TermVi
             holder._termItemView.setText(current.Title);
         } else {
             // Covers the case of data not being ready yet.
-            holder._termItemView.setText("No Term");
+            holder._termItemView.setText("No Assessment");
         }
     }
 
@@ -76,13 +76,17 @@ public class TermListAdapter extends RecyclerView.Adapter<TermListAdapter.TermVi
             itemView.setOnClickListener(this);
         }
 
+        public Term getItemAtPosition(int position) {
+            return _term.get(position);
+        }
+
         @Override
         public void onClick(View view) {
             // Triggers click upwards to the adapter on click
             if (listener != null) {
                 int position = getAdapterPosition();
 
-                Term x = _term.get(position);
+                Term x = getItemAtPosition(position);
 
                 if (position != RecyclerView.NO_POSITION) {
                     listener.onItemClick(itemView, x);

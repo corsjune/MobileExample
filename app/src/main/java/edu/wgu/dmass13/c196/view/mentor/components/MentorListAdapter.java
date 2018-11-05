@@ -76,13 +76,17 @@ public class MentorListAdapter extends RecyclerView.Adapter<MentorListAdapter.Me
             itemView.setOnClickListener(this);
         }
 
+        public Mentor getItemAtPosition(int position) {
+            return _mentor.get(position);
+        }
+
         @Override
         public void onClick(View view) {
             // Triggers click upwards to the adapter on click
             if (listener != null) {
                 int position = getAdapterPosition();
 
-                Mentor x = _mentor.get(position);
+                Mentor x = getItemAtPosition(position);
 
                 if (position != RecyclerView.NO_POSITION) {
                     listener.onItemClick(itemView, x);

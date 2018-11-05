@@ -29,6 +29,18 @@ public class MentorRepository {
         new insertAsyncTask(_myMentorDao).execute(mentor);
     }
 
+    public void updateMentor(Mentor mentor) {
+        new updateAsyncTask(_myMentorDao).execute(mentor);
+    }
+
+    public void deleteMentor(Long mentorId) {
+        new deleteAsyncTask(_myMentorDao).execute(mentorId);
+    }
+
+    public LiveData<Mentor> selectMentor(Long mentorId) {
+        return _myMentorDao.getMentor(mentorId);
+    }
+
     private static class insertAsyncTask extends AsyncTask<Mentor, Void, Void> {
 
         private MentorDAO mAsyncTaskDao;
@@ -43,4 +55,36 @@ public class MentorRepository {
             return null;
         }
     }
+
+    private static class updateAsyncTask extends AsyncTask<Mentor, Void, Void> {
+
+        private MentorDAO mAsyncTaskDao;
+
+        updateAsyncTask(MentorDAO dao) {
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(final Mentor... params) {
+            mAsyncTaskDao.updateMentor(params[0]);
+            return null;
+        }
+    }
+
+
+    private static class deleteAsyncTask extends AsyncTask<Long, Void, Void> {
+
+        private MentorDAO mAsyncTaskDao;
+
+        deleteAsyncTask(MentorDAO dao) {
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(final Long... params) {
+            mAsyncTaskDao.deleteMentor(params[0]);
+            return null;
+        }
+    }
+
 }

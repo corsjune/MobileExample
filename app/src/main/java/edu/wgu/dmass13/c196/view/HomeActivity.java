@@ -1,9 +1,12 @@
 package edu.wgu.dmass13.c196.view;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Toolbar;
 
 import edu.wgu.dmass13.c196.R;
 import edu.wgu.dmass13.c196.globals.Enums;
@@ -12,12 +15,18 @@ import edu.wgu.dmass13.c196.view.course.CourseListActivity;
 import edu.wgu.dmass13.c196.view.mentor.MentorListActivity;
 import edu.wgu.dmass13.c196.view.term.TermListActivity;
 
-public class HomeActivity extends Activity {
+public class HomeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+
+        // Get a support ActionBar corresponding to this toolbar
+        android.support.v7.app.ActionBar ab = getSupportActionBar();
+        // Enable the Up button
+        ab.setDisplayHomeAsUpEnabled(true);
     }
 
     public void cmdMentors_OnClick(View view) {

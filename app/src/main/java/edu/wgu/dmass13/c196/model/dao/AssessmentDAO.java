@@ -1,5 +1,6 @@
 package edu.wgu.dmass13.c196.model.dao;
 
+import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.*;
 
 import java.util.List;
@@ -11,10 +12,10 @@ public interface AssessmentDAO {
 
 
     @Query("select * from assessment")
-    List<Assessment> getAllAssessments();
+    LiveData<List<Assessment>> getAllAssessments();
 
     @Query("select * from assessment where assessmentid = :assessmentId")
-    List<Assessment> getAssessment(long assessmentId);
+    LiveData<Assessment> getAssessment(long assessmentId);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void createAssessment(Assessment assessment);

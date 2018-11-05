@@ -20,7 +20,7 @@ public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.Co
 
     // Define the listener interface
     public interface OnItemClickListener {
-        void onItemClick(View itemView, Course course);
+        void onItemClick(View itemView, Course assessment);
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
@@ -28,7 +28,7 @@ public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.Co
     }
 
     private final LayoutInflater _inflater;
-    private List<Course> _courses; // Cached copy of words
+    private List<Course> _course; // Cached copy of words
 
     public CourseListAdapter(Context context) {
         _inflater = LayoutInflater.from(context);
@@ -42,17 +42,17 @@ public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.Co
 
     @Override
     public void onBindViewHolder(CourseViewHolder holder, int position) {
-        if (_courses != null) {
-            Course current = _courses.get(position);
+        if (_course != null) {
+            Course current = _course.get(position);
             holder._courseItemView.setText(current.CourseTitle);
         } else {
             // Covers the case of data not being ready yet.
-            holder._courseItemView.setText("No Course");
+            holder._courseItemView.setText("No Assessment");
         }
     }
 
     public void setCourse(List<Course> course) {
-        _courses = course;
+        _course = course;
         notifyDataSetChanged();
     }
 
@@ -61,8 +61,8 @@ public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.Co
     // mWords has not been updated (means initially, it's null, and we can't return null).
     @Override
     public int getItemCount() {
-        if (_courses != null)
-            return _courses.size();
+        if (_course != null)
+            return _course.size();
         else return 0;
     }
 
@@ -76,13 +76,17 @@ public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.Co
             itemView.setOnClickListener(this);
         }
 
+        public Course getItemAtPosition(int position) {
+            return _course.get(position);
+        }
+
         @Override
         public void onClick(View view) {
             // Triggers click upwards to the adapter on click
             if (listener != null) {
                 int position = getAdapterPosition();
 
-                Course x = _courses.get(position);
+                Course x = getItemAtPosition(position);
 
                 if (position != RecyclerView.NO_POSITION) {
                     listener.onItemClick(itemView, x);
