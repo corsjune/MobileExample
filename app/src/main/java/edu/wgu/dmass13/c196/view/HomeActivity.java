@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Toolbar;
 
@@ -22,12 +23,26 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-
+        // Find the toolbar view inside the activity layout
+        android.support.v7.widget.Toolbar toolbar = ( android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
+        // Sets the Toolbar to act as the ActionBar for this Activity window.
+        // Make sure the toolbar exists in the activity and is not null
+        setSupportActionBar(toolbar);
         // Get a support ActionBar corresponding to this toolbar
-        android.support.v7.app.ActionBar ab = getSupportActionBar();
+         android.support.v7.app.ActionBar ab = getSupportActionBar();
         // Enable the Up button
-        // ab.setDisplayHomeAsUpEnabled(true);
+          ab.setDisplayHomeAsUpEnabled(true);
     }
+
+
+    // Menu icons are inflated just as they were with actionbar
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
 
     public void cmdMentors_OnClick(View view) {
         Intent intent = new Intent(HomeActivity.this, MentorListActivity.class);
