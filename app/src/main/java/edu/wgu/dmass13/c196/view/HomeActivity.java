@@ -32,6 +32,12 @@ public class HomeActivity extends AppCompatActivity {
          android.support.v7.app.ActionBar ab = getSupportActionBar();
         // Enable the Up button
           ab.setDisplayHomeAsUpEnabled(true);
+
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send.");
+        sendIntent.setType("text/plain");
+        startActivity(sendIntent);
     }
 
 
