@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -29,6 +30,7 @@ public class AssessmentEditActivity extends BaseActivity {
     private EditText _assessmentDate;
     private EditText _goalDate;
     private RadioGroup _assessmentType;
+    private CheckBox _goalDateAlert;
 
     /*
     assessment_edit_type
@@ -78,6 +80,9 @@ public class AssessmentEditActivity extends BaseActivity {
         _goalDate.setText(Helpers.ConvertDateToString(assessment.GoalDate));
         _goalDate.setOnClickListener(new myDatePicker(_goalDate, this));
 
+        _goalDateAlert = findViewById(R.id.ckGoalAlert);
+        _goalDateAlert.setChecked(assessment.GoalAlert);
+
 
         _assessmentType = findViewById(R.id.assessment_edit_type);
 
@@ -116,6 +121,8 @@ public class AssessmentEditActivity extends BaseActivity {
             currentAssessment.Name = GetStringValueFromEditText(_assessmentName);
             currentAssessment.AssessmentDate = GetDateValueFromEditText(_assessmentDate);
             currentAssessment.GoalDate = GetDateValueFromEditText(_goalDate);
+            currentAssessment.GoalAlert = _goalDateAlert.isChecked();
+
 
             int rb = _assessmentType.getCheckedRadioButtonId();
 

@@ -19,4 +19,6 @@ public class Assessment implements Serializable {
     public Date AssessmentDate;
 
     public Date GoalDate;
+
+    public boolean GoalAlert;
 }

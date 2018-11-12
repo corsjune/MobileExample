@@ -16,11 +16,15 @@ public class Course implements Serializable {
 
     public String CourseTitle;
 
+    public String Status;
+
     public Date StartDate;
 
-    public Date  EndDate;
+    public Date EndDate;
 
-    public Enums.CourseStatus Status;
+    public boolean StartDateAlert;
+
+    public boolean EndDateAlert;
 
     public String Notes;
 

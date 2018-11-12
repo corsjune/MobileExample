@@ -1,35 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context=".view.HomeActivity">
+    android:layout_height="match_parent">
 
-    <include
-        layout="@layout/toolbar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:titleTextColor="@android:color/white"/>
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <ScrollView
-        android:id="@+id/scrollView2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="49dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        <include layout="@layout/toolbar" />
+    </android.support.design.widget.AppBarLayout>
 
-        <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".view.HomeActivity">
+            android:fitsSystemWindows="true"
+            android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/imageView"
@@ -37,12 +29,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:scaleType="centerInside"
-                android:src="@drawable/wgu_national_desktop_logo"
-                app:layout_constraintBottom_toTopOf="@+id/txtDirections"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:src="@drawable/wgu_national_desktop_logo" />
 
 
             <TextView
@@ -52,12 +39,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="45dp"
                 android:gravity="center_horizontal|center"
-                android:text="Click a button below to get started!"
-                app:layout_constraintBottom_toTopOf="@+id/cmdMentors"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView" />
+                android:text="Click a button below to get started!" />
 
             <Button
                 android:id="@+id/cmdAssessment"
@@ -66,10 +48,7 @@
                 android:layout_marginTop="2dp"
                 android:layout_marginBottom="2dp"
                 android:onClick="cmdAssessment_OnClick"
-                android:text="View / Edit Assessments"
-                app:layout_constraintBottom_toTopOf="@+id/cmdCourse"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cmdMentors" />
+                android:text="View / Edit Assessments" />
 
             <Button
                 android:id="@+id/cmdCourse"
@@ -78,11 +57,7 @@
                 android:layout_marginTop="2dp"
                 android:layout_marginBottom="2dp"
                 android:onClick="cmdCourse_OnClick"
-                android:text="View / Edit Courses"
-                app:layout_constraintBottom_toTopOf="@+id/cmdTerm"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cmdAssessment" />
+                android:text="View / Edit Courses" />
 
             <Button
                 android:id="@+id/cmdTerm"
@@ -91,26 +66,17 @@
                 android:layout_marginTop="2dp"
                 android:layout_marginBottom="2dp"
                 android:onClick="cmdTerm_OnClick"
-                android:text="View / Edit Terms"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cmdCourse" />
-
-
+                android:text="View / Edit Terms" />
             <Button
                 android:id="@+id/cmdMentors"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:layout_marginBottom="2dp"
                 android:onClick="cmdMentors_OnClick"
-                android:text="View / Edit Mentors"
-                app:layout_constraintBottom_toTopOf="@+id/cmdAssessment"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtDirections" />
-        </android.support.constraint.ConstraintLayout>
+                android:text="View / Edit Mentors" />
+        </LinearLayout>
 
-    </ScrollView>
 
-</android.support.constraint.ConstraintLayout>
+    </android.support.v4.widget.NestedScrollView>
+</android.support.design.widget.CoordinatorLayout>
