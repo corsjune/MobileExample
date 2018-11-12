@@ -11,26 +11,29 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import edu.wgu.dmass13.c196.R;
+import edu.wgu.dmass13.c196.globals.Helpers;
 import edu.wgu.dmass13.c196.model.entity.Mentor;
+import edu.wgu.dmass13.c196.view.BaseActivity;
 import edu.wgu.dmass13.c196.viewmodel.mentor.MentorEditViewModel;
 
-public class MentorEditActivity extends AppCompatActivity {
+public class MentorEditActivity extends BaseActivity {
 
     public static final String CURRENT_MENTOR = "edu.wgu.dmass13.c196.CurrentMentor";
     private MentorEditViewModel _MentorEditViewModel;
-    private EditText mEditWordView;
+    private EditText _mentorName;
+    private EditText _mentorPhone;
+    private EditText _mentorEmail;
+
+
+    @Override
+    protected int getContentView() {
+        return R.layout.activity_mentor_edit;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mentor_edit);
 
-
-        // Get a support ActionBar corresponding to this toolbar
-        android.support.v7.app.ActionBar ab = getSupportActionBar();
-        // Enable the Up button
-        ab.setDisplayHomeAsUpEnabled(true);
-        ab.setDisplayShowHomeEnabled(true);
 
         _MentorEditViewModel = ViewModelProviders.of(this).get(MentorEditViewModel.class);
 
@@ -42,9 +45,21 @@ public class MentorEditActivity extends AppCompatActivity {
             _MentorEditViewModel.setMentor(mentor);
         }
 
+        PopulateUI();
+    }
 
-        mEditWordView = findViewById(R.id.edit_word);
-        mEditWordView.setText(_MentorEditViewModel.getMentor().Name);
+
+    public void PopulateUI() {
+
+        Mentor mentor = _MentorEditViewModel.getMentor();
+
+        _mentorEmail = findViewById(R.id.mentor_edit_email);
+        _mentorName = findViewById(R.id.mentor_edit_name);
+        _mentorPhone = findViewById(R.id.mentor_edit_phone);
+
+        _mentorEmail.setText(mentor.Email != null ? mentor.Email : null);
+        _mentorName.setText(mentor.Name != null ? mentor.Name : null);
+        _mentorPhone.setText(mentor.PhoneNumber != null ? mentor.PhoneNumber : null);
 
         final Button button = findViewById(R.id.button_save);
         button.setOnClickListener(new View.OnClickListener() {
@@ -52,29 +67,36 @@ public class MentorEditActivity extends AppCompatActivity {
                 SaveMentor();
             }
         });
-
-
     }
 
     public void SaveMentor() {
         Intent replyIntent = new Intent();
-        if (TextUtils.isEmpty(mEditWordView.getText())) {
+
+
+        if (TextUtils.isEmpty(_mentorName.getText())) {
             setResult(RESULT_CANCELED, replyIntent);
         } else {
 
-           /* Mentor newMentor = new Mentor();
-            newMentor.Name = mEditWordView.getText().toString();
+           /* Term newTerm = new Term();
+            newTerm.Name = mEditWordView.getText().toString();
 
             Bundle bundle = new Bundle();
-            bundle.putSerializable(CURRENT_MENTOR, (Serializable) newMentor);
+            bundle.putSerializable(CURRENT_TERM, (Serializable) newTerm);
             replyIntent.putExtras(bundle);
 */
 
-            _MentorEditViewModel.getMentor().Name = mEditWordView.getText().toString();
+            Mentor mentor = _MentorEditViewModel.getMentor();
+
+            mentor.Email = GetStringValueFromEditText(_mentorEmail);
+            mentor.Name = GetStringValueFromEditText(_mentorName);
+            mentor.PhoneNumber = GetStringValueFromEditText(_mentorPhone);
+
             _MentorEditViewModel.save();
 
             setResult(RESULT_OK, replyIntent);
         }
         finish();
     }
+
+
 }

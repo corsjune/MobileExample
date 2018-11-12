@@ -16,37 +16,18 @@ import edu.wgu.dmass13.c196.view.course.CourseListActivity;
 import edu.wgu.dmass13.c196.view.mentor.MentorListActivity;
 import edu.wgu.dmass13.c196.view.term.TermListActivity;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends BaseActivity {
+
+    @Override
+    protected int getContentView() {
+        return R.layout.activity_home;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        _ab.setDisplayHomeAsUpEnabled(true);
 
-        // Find the toolbar view inside the activity layout
-        android.support.v7.widget.Toolbar toolbar = ( android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
-        // Sets the Toolbar to act as the ActionBar for this Activity window.
-        // Make sure the toolbar exists in the activity and is not null
-        setSupportActionBar(toolbar);
-        // Get a support ActionBar corresponding to this toolbar
-         android.support.v7.app.ActionBar ab = getSupportActionBar();
-        // Enable the Up button
-          ab.setDisplayHomeAsUpEnabled(true);
-
-        Intent sendIntent = new Intent();
-        sendIntent.setAction(Intent.ACTION_SEND);
-        sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send.");
-        sendIntent.setType("text/plain");
-        startActivity(sendIntent);
-    }
-
-
-    // Menu icons are inflated just as they were with actionbar
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
     }
 
 

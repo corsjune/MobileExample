@@ -8,13 +8,10 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.Toast;
 
 import java.io.Serializable;
@@ -22,31 +19,28 @@ import java.util.List;
 
 import edu.wgu.dmass13.c196.R;
 import edu.wgu.dmass13.c196.globals.Enums;
-import edu.wgu.dmass13.c196.model.database.AppDatabase;
 import edu.wgu.dmass13.c196.model.entity.Term;
+import edu.wgu.dmass13.c196.view.BaseActivity;
 import edu.wgu.dmass13.c196.view.term.components.TermListAdapter;
 import edu.wgu.dmass13.c196.viewmodel.term.TermListViewModel;
 
-public class TermListActivity extends AppCompatActivity {
+public class TermListActivity extends BaseActivity {
 
     //private AppDatabase database;
     private TermListViewModel _TermListViewModel;
 
     public static final int NEW_TERM_ACTIVITY_REQUEST_CODE = 1;
 
+    @Override
+    protected int getContentView() {
+        return R.layout.activity_list;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_term_list);
-
-        //database = AppDatabase.getDatabase(getApplicationContext());
-
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
 
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
-
         final TermListAdapter adapter = new TermListAdapter(this);
 
         adapter.setOnItemClickListener(new TermListAdapter.OnItemClickListener() {

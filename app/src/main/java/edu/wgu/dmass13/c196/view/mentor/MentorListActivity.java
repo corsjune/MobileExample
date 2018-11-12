@@ -22,35 +22,27 @@ import java.util.List;
 import edu.wgu.dmass13.c196.R;
 import edu.wgu.dmass13.c196.globals.Enums;
 import edu.wgu.dmass13.c196.model.entity.Mentor;
+import edu.wgu.dmass13.c196.view.BaseActivity;
 import edu.wgu.dmass13.c196.view.mentor.components.MentorListAdapter;
 import edu.wgu.dmass13.c196.viewmodel.mentor.MentorListViewModel;
 
-public class MentorListActivity extends AppCompatActivity {
+public class MentorListActivity extends BaseActivity {
 
     //private AppDatabase database;
     private MentorListViewModel _MentorListViewModel;
 
     public static final int NEW_MENTOR_ACTIVITY_REQUEST_CODE = 1;
 
+
     @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
+    protected int getContentView() {
+        return R.layout.activity_list;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mentor_list);
 
-
-        // Get a support ActionBar corresponding to this toolbar
-        android.support.v7.app.ActionBar ab = getSupportActionBar();
-        // Enable the Up button
-        ab.setDisplayHomeAsUpEnabled(true);
-        ab.setDisplayShowHomeEnabled(true);
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
 
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
 

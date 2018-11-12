@@ -12,10 +12,11 @@ public class Assessment implements Serializable {
     @PrimaryKey(autoGenerate = true)
     public Long AssessmentID = null;
 
-    public Enums.AssessmentType AssessmentType;
+    public short AssessmentType;
 
     public String Name;
 
     public Date AssessmentDate;
 
+    public Date GoalDate;
 }

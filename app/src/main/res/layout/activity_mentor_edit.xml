@@ -8,17 +8,56 @@
 
     <include layout="@layout/toolbar" />
 
-    <EditText
-        android:id="@+id/edit_word"
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/layout_mentor_edit_name"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-light"
-        android:hint="@string/mentor_hint_word"
-        android:inputType="textAutoComplete"
-        android:padding="@dimen/small_padding"
-        android:layout_marginBottom="@dimen/big_padding"
-        android:layout_marginTop="@dimen/big_padding"
-        android:textSize="18sp" />
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/mentor_edit_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/big_padding"
+            android:layout_marginBottom="@dimen/big_padding"
+            android:fontFamily="sans-serif-light"
+            android:hint="@string/mentor_edit_name"
+            android:padding="@dimen/small_padding"
+            android:textSize="18sp" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/layout_mentor_edit_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/mentor_edit_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/big_padding"
+            android:layout_marginBottom="@dimen/big_padding"
+            android:hint="@string/mentor_edit_phone"
+            android:inputType="phone"
+            android:padding="@dimen/small_padding"
+            android:textSize="18sp" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/layout_mentor_edit_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/mentor_edit_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/big_padding"
+            android:layout_marginBottom="@dimen/big_padding"
+            android:hint="@string/mentor_edit_email"
+            android:inputType="textEmailAddress"
+            android:padding="@dimen/small_padding"
+            android:textSize="18sp" />
+    </android.support.design.widget.TextInputLayout>
 
     <Button
         android:id="@+id/button_save"

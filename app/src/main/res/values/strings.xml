@@ -32,5 +32,14 @@
     <string name="title_activity_mentor_edit">Edit Mentor</string>
     <string name="title_activity_term_list">Terms</string>
     <string name="title_activity_term_edit">Edit Term</string>
+    <string name="term_edit_StartDate">Start Date</string>
+    <string name="term_edit_EndDate">End Date</string>
+    <string name="term_edit_title">Term Title (e.g. Term 1)</string>
+    <string name="mentor_edit_name">Mentor Name</string>
+    <string name="mentor_edit_phone">Phone</string>
+    <string name="mentor_edit_email">Email</string>
+    <string name="assessment_edit_date">Assessment Date</string>
+    <string name="assessment_edit_name">Assessment Name</string>
+    <string name="assessment_goal_date">Goal Date</string>
 
 </resources>

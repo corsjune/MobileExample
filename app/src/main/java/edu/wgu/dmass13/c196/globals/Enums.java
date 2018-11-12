@@ -9,11 +9,11 @@ public class Enums {
         PlanToTake
     }
 
-    public enum AssessmentType {
-        Objective,
-        Performance
+    public class AssessmentType {
+        public static final short
+                Objective = 0,
+                Performance = 1;
     }
-
 
     public class ActivityActionTypes {
         public static final short

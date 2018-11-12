@@ -13,19 +13,24 @@ import java.io.Serializable;
 
 import edu.wgu.dmass13.c196.R;
 import edu.wgu.dmass13.c196.model.entity.Course;
+import edu.wgu.dmass13.c196.view.BaseActivity;
 import edu.wgu.dmass13.c196.viewmodel.course.CourseEditViewModel;
 import edu.wgu.dmass13.c196.viewmodel.course.CourseListViewModel;
 
-public class CourseEditActivity extends AppCompatActivity {
+public class CourseEditActivity extends BaseActivity {
 
     public static final String CURRENT_COURSE = "edu.wgu.dmass13.c196.CurrentCourse";
     private CourseEditViewModel _CourseEditViewModel;
     private EditText mEditWordView;
 
     @Override
+    protected int getContentView() {
+        return R.layout.activity_course_edit;
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_course_edit);
 
         _CourseEditViewModel = ViewModelProviders.of(this).get(CourseEditViewModel.class);
 

@@ -24,26 +24,25 @@ import edu.wgu.dmass13.c196.R;
 import edu.wgu.dmass13.c196.globals.Enums;
 import edu.wgu.dmass13.c196.model.database.AppDatabase;
 import edu.wgu.dmass13.c196.model.entity.Course;
+import edu.wgu.dmass13.c196.view.BaseActivity;
 import edu.wgu.dmass13.c196.view.course.components.CourseListAdapter;
 import edu.wgu.dmass13.c196.viewmodel.course.CourseListViewModel;
 
-public class CourseListActivity extends AppCompatActivity {
+public class CourseListActivity extends BaseActivity {
 
     //private AppDatabase database;
     private CourseListViewModel _CourseListViewModel;
 
     public static final int NEW_COURSE_ACTIVITY_REQUEST_CODE = 1;
 
+    @Override
+    protected int getContentView() {
+        return R.layout.activity_list;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_course_list);
-
-        //database = AppDatabase.getDatabase(getApplicationContext());
-
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
 
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
 

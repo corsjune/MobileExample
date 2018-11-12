@@ -28,6 +28,7 @@ public class Converters {
         return Enums.CourseStatus.values()[value];
     }
 
+    /*
     @TypeConverter
     public static  int fromAssessmentType(Enums.AssessmentType value) {
         return value.ordinal();
@@ -37,6 +38,6 @@ public class Converters {
     public static Enums.AssessmentType ToAssessmentType(int value) {
         return Enums.AssessmentType.values()[value];
     }
-
+    */
 
 }
