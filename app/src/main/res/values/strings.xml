@@ -41,5 +41,10 @@
     <string name="assessment_edit_date">Assessment Date</string>
     <string name="assessment_edit_name">Assessment Name</string>
     <string name="assessment_goal_date">Goal Date</string>
+    <string name="course_edit_enddate">End Date</string>
+    <string name="course_edit_startdate">Start Date</string>
+    <string name="course_edit_status">Status</string>
+    <string name="course_edit_title">Title</string>
+    <string name="course_edit_notes">Notes</string>
 
 </resources>
