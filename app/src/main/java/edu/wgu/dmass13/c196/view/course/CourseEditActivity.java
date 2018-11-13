@@ -1,10 +1,14 @@
 package edu.wgu.dmass13.c196.view.course;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -33,6 +37,9 @@ public class CourseEditActivity extends BaseActivity {
     private EditText _endDate;
     private CheckBox _endDateAlert;
     private EditText _notes;
+
+
+    // private static final int MENU_LOGOUT = MENU.FIRST + 4;
 
 
     @Override
@@ -92,6 +99,44 @@ public class CourseEditActivity extends BaseActivity {
                 SaveCourse();
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onOptionsItemSelected(item);
+
+        switch (item.getItemId()) {
+            case Enums.MenuValues.SHARE:
+
+                String noteValue = GetStringValueFromEditText(_notes);
+
+                if (noteValue == null || noteValue.isEmpty()) {
+                    new AlertDialog.Builder(CourseEditActivity.this)
+                            .setTitle("WGU 196")
+                            .setMessage("You do not have any notes to send for this course!")
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int whichButton) {
+                                }
+                            })
+                            .show();
+                } else {
+                    Intent sendIntent = new Intent();
+                    sendIntent.setAction(Intent.ACTION_SEND);
+                    sendIntent.putExtra(Intent.EXTRA_TEXT, noteValue);
+                    sendIntent.setType("text/plain");
+                    startActivity(sendIntent);
+                }
+                break;
+        }
+        return false;
+    }
+
+
+    @Override
+    public void AddMenuItems(Menu menu) {
+        menu.add(0, Enums.MenuValues.INFO, Menu.NONE, getString(R.string.menu_action_info)).setIcon(android.R.drawable.ic_dialog_info).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        menu.add(0, Enums.MenuValues.SHARE, Menu.NONE, getString(R.string.menu_action_share)).setIcon(android.R.drawable.ic_menu_share).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
     }
 
     public void SaveCourse() {

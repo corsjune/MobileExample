@@ -46,5 +46,7 @@
     <string name="course_edit_status">Status</string>
     <string name="course_edit_title">Title</string>
     <string name="course_edit_notes">Notes</string>
+    <string name="menu_action_share">Share</string>
+    <string name="menu_action_info">Info</string>
 
 </resources>

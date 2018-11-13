@@ -3,12 +3,16 @@ package edu.wgu.dmass13.c196.view;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -16,7 +20,9 @@ import java.util.Date;
 import java.util.Locale;
 
 import edu.wgu.dmass13.c196.R;
+import edu.wgu.dmass13.c196.globals.Enums;
 import edu.wgu.dmass13.c196.globals.Helpers;
+import edu.wgu.dmass13.c196.view.term.TermListActivity;
 
 public class BaseActivity extends AppCompatActivity {
 
@@ -25,11 +31,22 @@ public class BaseActivity extends AppCompatActivity {
 
 
     // Menu icons are inflated just as they were with actionbar
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    //@Override
+    //public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+    //    getMenuInflater().inflate(R.menu.menu_main, menu);
+    //    return true;
+    // }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        menu.clear();
+        AddMenuItems(menu);
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    public void AddMenuItems(Menu menu) {
+        menu.add(0, Enums.MenuValues.INFO, Menu.NONE, getString(R.string.menu_action_info)).setIcon(android.R.drawable.ic_dialog_info).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
     }
 
     @Override
@@ -37,6 +54,28 @@ public class BaseActivity extends AppCompatActivity {
         onBackPressed();
         return true;
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onOptionsItemSelected(item);
+
+        switch (item.getItemId()) {
+            case Enums.MenuValues.INFO:
+
+                new AlertDialog.Builder(BaseActivity.this)
+                        .setTitle("WGU 196")
+                        .setMessage("Hello")
+                        .setIcon(android.R.drawable.ic_dialog_info)
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                            }
+                        })
+                        .show();
+                break;
+        }
+        return false;
+    }
+
 
     protected int getContentView() {
         return -9999;

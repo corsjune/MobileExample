@@ -15,6 +15,12 @@ public class Enums {
                 Performance = 1;
     }
 
+    public class MenuValues {
+        public static final short
+                INFO = 0,
+                SHARE = 1;
+    }
+
     public class ActivityActionTypes {
         public static final short
                 Assessment_Edit = 0,
