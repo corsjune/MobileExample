@@ -36,7 +36,7 @@ public class MentorListAdapter extends RecyclerView.Adapter<MentorListAdapter.Me
 
     @Override
     public MentorViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = _inflater.inflate(R.layout.recyclerview_item, parent, false);
+        View itemView = _inflater.inflate(R.layout.activity_recycler_list_item, parent, false);
         return new MentorViewHolder(itemView);
     }
 

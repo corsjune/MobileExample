@@ -33,7 +33,7 @@ public class TermListActivity extends BaseActivity {
 
     @Override
     protected int getContentView() {
-        return R.layout.activity_list;
+        return R.layout.activity_recycler_list;
     }
 
     @Override
