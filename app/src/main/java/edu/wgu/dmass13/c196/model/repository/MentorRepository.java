@@ -38,7 +38,7 @@ public class MentorRepository {
     }
 
     public LiveData<Mentor> selectMentor(Long mentorId) {
-        return _myMentorDao.getMentor(mentorId);
+        return _myMentorDao.getSingleMentor(mentorId);
     }
 
     private static class insertAsyncTask extends AsyncTask<Mentor, Void, Void> {

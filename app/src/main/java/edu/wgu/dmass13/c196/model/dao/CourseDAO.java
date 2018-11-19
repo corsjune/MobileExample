@@ -15,7 +15,7 @@ public interface CourseDAO {
     LiveData<List<Course>> getAllCourses();
 
     @Query("select * from course where courseid = :courseId")
-    LiveData<Course> getCourse(long courseId);
+    LiveData<Course> getSingleCourse(long courseId);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void createCourse(Course course);

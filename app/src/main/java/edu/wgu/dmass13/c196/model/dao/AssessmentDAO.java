@@ -15,7 +15,7 @@ public interface AssessmentDAO {
     LiveData<List<Assessment>> getAllAssessments();
 
     @Query("select * from assessment where assessmentid = :assessmentId")
-    LiveData<Assessment> getAssessment(long assessmentId);
+    LiveData<Assessment> getSingleAssessment(long assessmentId);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void createAssessment(Assessment assessment);

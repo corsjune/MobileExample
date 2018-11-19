@@ -15,7 +15,7 @@ public interface MentorDAO {
     LiveData<List<Mentor>> getAllMentors();
 
     @Query("select * from mentor where mentorid = :mentorId")
-    LiveData<Mentor> getMentor(long mentorId);
+    LiveData<Mentor> getSingleMentor(long mentorId);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void createMentor(Mentor mentor);

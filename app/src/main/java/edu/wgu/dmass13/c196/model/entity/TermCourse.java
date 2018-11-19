@@ -2,6 +2,7 @@ package edu.wgu.dmass13.c196.model.entity;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 
 import java.io.Serializable;
@@ -12,7 +13,8 @@ import java.io.Serializable;
                 childColumns = "CourseID"),
         @ForeignKey(entity = Term.class,
                 parentColumns = "TermID",
-                childColumns = "TermID")
+                childColumns = "TermID")},
+        indices = {@Index("TermID"), @Index("CourseID")
 })
 public class TermCourse implements Serializable {
 

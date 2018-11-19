@@ -1,15 +1,18 @@
 package edu.wgu.dmass13.c196.view.term;
 
 import android.app.DatePickerDialog;
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.SparseLongArray;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -17,26 +20,34 @@ import android.widget.EditText;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
+import android.support.v4.util.LongSparseArray;
+
 import edu.wgu.dmass13.c196.R;
+import edu.wgu.dmass13.c196.globals.Enums;
 import edu.wgu.dmass13.c196.globals.Helpers;
+import edu.wgu.dmass13.c196.model.entity.Course;
 import edu.wgu.dmass13.c196.model.entity.Term;
+import edu.wgu.dmass13.c196.model.entity.TermCourse;
 import edu.wgu.dmass13.c196.view.BaseActivity;
 import edu.wgu.dmass13.c196.view.term.components.MyRecyclerViewAdapter;
+import edu.wgu.dmass13.c196.view.term.components.TermCourseListAdapter;
+import edu.wgu.dmass13.c196.view.term.components.TermListAdapter;
 import edu.wgu.dmass13.c196.viewmodel.term.TermEditViewModel;
 import edu.wgu.dmass13.c196.viewmodel.term.TermListViewModel;
 
-public class TermEditActivity extends BaseActivity implements MyRecyclerViewAdapter.ItemClickListener {
+public class TermEditActivity extends BaseActivity {
 
     public static final String CURRENT_TERM = "edu.wgu.dmass13.c196.CurrentTerm";
     private TermEditViewModel _TermEditViewModel;
     private EditText mEditTermTitle;
     private EditText mEditTermStartDate;
     private EditText mEditTermEndDate;
-    MyRecyclerViewAdapter adapter;
 
     @Override
     protected int getContentView() {
@@ -63,10 +74,6 @@ public class TermEditActivity extends BaseActivity implements MyRecyclerViewAdap
 
     }
 
-    @Override
-    public void onItemClick(View view, int position) {
-        Log.i("TAG", "You clicked number " + adapter.getItem(position) + ", which is at cell position " + position);
-    }
 
     public void PopulateUI() {
 
@@ -93,17 +100,37 @@ public class TermEditActivity extends BaseActivity implements MyRecyclerViewAdap
         });
 
 
-        // data to populate the RecyclerView with
-        String[] data = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48"};
 
         // set up the RecyclerView
         RecyclerView recyclerView = findViewById(R.id.rvNumbers);
+        final TermCourseListAdapter adapter = new TermCourseListAdapter(this);
+        adapter.setOnItemClickListener(new TermCourseListAdapter.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(View itemView, Course course, Boolean ClickState) {
+
+                LongSparseArray<Boolean> lsa = _TermEditViewModel.getCourseCheckState();
+                lsa.put(course.CourseID, ClickState);
+            }
+        });
+
+
         int numberOfColumns = 2;
-        recyclerView.setLayoutManager(new GridLayoutManager(this, numberOfColumns));
-        adapter = new MyRecyclerViewAdapter(this, data);
-        adapter.setClickListener(this);
         recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new GridLayoutManager(this, numberOfColumns));
+
+        adapter.setSelectedCourses(_TermEditViewModel.getCourseCheckState());
+
+        _TermEditViewModel.getAllCourses().observe(this, new Observer<List<Course>>() {
+            @Override
+            public void onChanged(@Nullable final List<Course> courses) {
+                // Update the cached copy of the words in the adapter.
+                adapter.setAllCourses(courses);
+
+            }
+        });
     }
+
 
     public void SaveTerm() {
         Intent replyIntent = new Intent();
@@ -118,10 +145,28 @@ public class TermEditActivity extends BaseActivity implements MyRecyclerViewAdap
             bundle.putSerializable(CURRENT_TERM, (Serializable) newTerm);
             replyIntent.putExtras(bundle);
 */
+            Term term = _TermEditViewModel.getTerm();
+            LongSparseArray<Boolean> lsa = _TermEditViewModel.getCourseCheckState();
 
-            _TermEditViewModel.getTerm().Title = mEditTermTitle.getText().toString();
-            _TermEditViewModel.getTerm().StartDate = GetDateValueFromEditText(mEditTermStartDate);
-            _TermEditViewModel.getTerm().EndDate = GetDateValueFromEditText(mEditTermEndDate);
+            term.Title = mEditTermTitle.getText().toString();
+            term.StartDate = GetDateValueFromEditText(mEditTermStartDate);
+            term.EndDate = GetDateValueFromEditText(mEditTermEndDate);
+
+            term.SelectedCourses = new ArrayList<TermCourse>();
+
+
+            for (int i = 0; i < lsa.size(); i++) {
+
+                long key = lsa.keyAt(i);
+
+                if (lsa.get(key, false)) {
+                    TermCourse newTC = new TermCourse();
+                    newTC.CourseID = lsa.keyAt(i);
+                    newTC.TermID = term.TermID;
+                    term.SelectedCourses.add(newTC);
+                }
+            }
+
             _TermEditViewModel.save();
 
             setResult(RESULT_OK, replyIntent);

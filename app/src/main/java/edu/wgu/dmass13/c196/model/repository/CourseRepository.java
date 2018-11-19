@@ -38,7 +38,7 @@ public class CourseRepository {
     }
 
     public LiveData<Course> selectCourse(Long courseId) {
-        return _myCourseDao.getCourse(courseId);
+        return _myCourseDao.getSingleCourse(courseId);
     }
 
     private static class insertAsyncTask extends AsyncTask<Course, Void, Void> {

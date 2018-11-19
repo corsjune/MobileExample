@@ -38,7 +38,7 @@ public class AssessmentRepository {
     }
 
     public LiveData<Assessment> selectAssessment(Long assessmentId) {
-        return _myAssessmentDao.getAssessment(assessmentId);
+        return _myAssessmentDao.getSingleAssessment(assessmentId);
     }
 
     private static class insertAsyncTask extends AsyncTask<Assessment, Void, Void> {

@@ -112,6 +112,7 @@ public class TermListActivity extends BaseActivity {
     }
 
     public void EditTerm(Term term) {
+
         Intent intent = new Intent(TermListActivity.this, TermEditActivity.class);
 
         if (term != null) {

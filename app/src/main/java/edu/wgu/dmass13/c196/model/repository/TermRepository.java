@@ -38,7 +38,7 @@ public class TermRepository {
     }
 
     public LiveData<Term> selectTerm(Long termId) {
-        return _myTermDao.getTerm(termId);
+        return _myTermDao.getSingleTerm(termId);
     }
 
     private static class insertAsyncTask extends AsyncTask<Term, Void, Void> {

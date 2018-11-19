@@ -9,18 +9,22 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import edu.wgu.dmass13.c196.R;
+import edu.wgu.dmass13.c196.model.entity.Course;
 
 public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> {
 
-    private String[] mData;
+    private ArrayList<Course> _course; // Cached copy of words
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
 
     // data is passed into the constructor
-    public MyRecyclerViewAdapter(Context context, String[] data) {
+    public MyRecyclerViewAdapter(Context context, ArrayList<Course> data) {
         this.mInflater = LayoutInflater.from(context);
-        this.mData = data;
+        this._course = data;
     }
 
     // inflates the cell layout from xml when needed
@@ -34,13 +38,13 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     // binds the data to the TextView in each cell
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.myCheckBox.setText(mData[position]);
+        holder.myCheckBox.setText(_course.get(position).CourseTitle);
     }
 
     // total number of cells
     @Override
     public int getItemCount() {
-        return mData.length;
+        return _course.size();
     }
 
 
@@ -61,8 +65,8 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     }
 
     // convenience method for getting data at click position
-    public String getItem(int id) {
-        return mData[id];
+    public long getItem(int id) {
+        return _course.get(id).CourseID;
     }
 
     // allows clicks events to be caught
