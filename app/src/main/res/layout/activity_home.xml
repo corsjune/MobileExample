@@ -50,6 +50,16 @@
                 android:onClick="cmdAssessment_OnClick"
                 android:text="View / Edit Assessments" />
 
+
+            <Button
+                android:id="@+id/cmdMentors"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:onClick="cmdMentors_OnClick"
+                android:text="View / Edit Mentors" />
+
             <Button
                 android:id="@+id/cmdCourse"
                 android:layout_width="match_parent"
@@ -67,14 +77,6 @@
                 android:layout_marginBottom="2dp"
                 android:onClick="cmdTerm_OnClick"
                 android:text="View / Edit Terms" />
-            <Button
-                android:id="@+id/cmdMentors"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:layout_marginBottom="2dp"
-                android:onClick="cmdMentors_OnClick"
-                android:text="View / Edit Mentors" />
         </LinearLayout>
 
 

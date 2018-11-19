@@ -1,11 +1,16 @@
 package edu.wgu.dmass13.c196.view.course;
 
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.annotation.Nullable;
+import android.support.v4.util.LongSparseArray;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,13 +21,22 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import edu.wgu.dmass13.c196.R;
 import edu.wgu.dmass13.c196.globals.Enums;
 import edu.wgu.dmass13.c196.globals.Helpers;
 import edu.wgu.dmass13.c196.model.entity.Assessment;
 import edu.wgu.dmass13.c196.model.entity.Course;
+import edu.wgu.dmass13.c196.model.entity.CourseAssessment;
+import edu.wgu.dmass13.c196.model.entity.CourseMentor;
+import edu.wgu.dmass13.c196.model.entity.Mentor;
+import edu.wgu.dmass13.c196.model.entity.TermCourse;
 import edu.wgu.dmass13.c196.view.BaseActivity;
+import edu.wgu.dmass13.c196.view.course.components.CourseAssessmentListAdapter;
+import edu.wgu.dmass13.c196.view.course.components.CourseMentorListAdapter;
+import edu.wgu.dmass13.c196.view.term.components.TermCourseListAdapter;
 import edu.wgu.dmass13.c196.viewmodel.course.CourseEditViewModel;
 import edu.wgu.dmass13.c196.viewmodel.course.CourseListViewModel;
 
@@ -53,14 +67,17 @@ public class CourseEditActivity extends BaseActivity {
 
         _CourseEditViewModel = ViewModelProviders.of(this).get(CourseEditViewModel.class);
 
-        Intent intent = getIntent();
-        Bundle bundle = intent.getExtras();
-        Course course = (bundle == null ? null : (Course) bundle.getSerializable(CourseEditActivity.CURRENT_COURSE));
+        if (_CourseEditViewModel.getCourse() == null) {
+            Intent intent = getIntent();
+            Bundle bundle = intent.getExtras();
+            Course course = (bundle == null ? null : (Course) bundle.getSerializable(CourseEditActivity.CURRENT_COURSE));
 
-        if (course != null) {
-            _CourseEditViewModel.setCourse(course);
+            if (course != null) {
+                _CourseEditViewModel.setCourse(course);
+            } else {
+                _CourseEditViewModel.setCourse(new Course());
+            }
         }
-
         PopulateUI();
 
     }
@@ -97,6 +114,68 @@ public class CourseEditActivity extends BaseActivity {
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 SaveCourse();
+            }
+        });
+
+        SetupCourseMentorRecycleView();
+        SetupCourseAssessmentRecycleView();
+    }
+
+    public void SetupCourseMentorRecycleView() {
+        // set up the RecyclerView
+        RecyclerView recyclerView = findViewById(R.id.rvCourseMentors);
+        final CourseMentorListAdapter adapter = new CourseMentorListAdapter(this);
+        adapter.setOnItemClickListener(new CourseMentorListAdapter.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(View itemView, Mentor mentor, Boolean ClickState) {
+                LongSparseArray<Boolean> lsa = _CourseEditViewModel.getMentorCheckState();
+                lsa.put(mentor.MentorID, ClickState);
+            }
+        });
+
+
+        int numberOfColumns = 2;
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new GridLayoutManager(this, numberOfColumns));
+
+        adapter.setSelectedMentors(_CourseEditViewModel.getMentorCheckState());
+
+        _CourseEditViewModel.getAllMentors().observe(this, new Observer<List<Mentor>>() {
+            @Override
+            public void onChanged(@Nullable final List<Mentor> mentors) {
+                // Update the cached copy of the words in the adapter.
+                adapter.setAllMentors(mentors);
+
+            }
+        });
+    }
+
+    public void SetupCourseAssessmentRecycleView() {
+        // set up the RecyclerView
+        RecyclerView recyclerView = findViewById(R.id.rvCourseAssessments);
+        final CourseAssessmentListAdapter adapter = new CourseAssessmentListAdapter(this);
+        adapter.setOnItemClickListener(new CourseAssessmentListAdapter.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(View itemView, Assessment assessment, Boolean ClickState) {
+                LongSparseArray<Boolean> lsa = _CourseEditViewModel.getAssessmentCheckState();
+                lsa.put(assessment.AssessmentID, ClickState);
+            }
+        });
+
+
+        int numberOfColumns = 2;
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new GridLayoutManager(this, numberOfColumns));
+
+        adapter.setSelectedAssessments(_CourseEditViewModel.getAssessmentCheckState());
+
+        _CourseEditViewModel.getAllAssessments().observe(this, new Observer<List<Assessment>>() {
+            @Override
+            public void onChanged(@Nullable final List<Assessment> assessments) {
+                // Update the cached copy of the words in the adapter.
+                adapter.setAllAssessments(assessments);
             }
         });
     }
@@ -153,6 +232,36 @@ public class CourseEditActivity extends BaseActivity {
             course.EndDate = GetDateValueFromEditText(_endDate);
             course.EndDateAlert = _endDateAlert.isChecked();
             course.Notes = GetStringValueFromEditText(_notes);
+
+            course.assignedAssignments = new ArrayList<CourseAssessment>();
+            LongSparseArray<Boolean> lsaAssignments = _CourseEditViewModel.getAssessmentCheckState();
+
+            for (int i = 0; i < lsaAssignments.size(); i++) {
+
+                long key = lsaAssignments.keyAt(i);
+
+                if (lsaAssignments.get(key, false)) {
+                    CourseAssessment newAs = new CourseAssessment();
+                    newAs.AssessmentID = lsaAssignments.keyAt(i);
+                    newAs.CourseID = course.CourseID;
+                    course.assignedAssignments.add(newAs);
+                }
+            }
+
+            course.assignedMentors = new ArrayList<CourseMentor>();
+            LongSparseArray<Boolean> lsaMentors = _CourseEditViewModel.getMentorCheckState();
+
+            for (int i = 0; i < lsaMentors.size(); i++) {
+
+                long key = lsaMentors.keyAt(i);
+
+                if (lsaMentors.get(key, false)) {
+                    CourseMentor newMent = new CourseMentor();
+                    newMent.MentorID = lsaMentors.keyAt(i);
+                    newMent.CourseID = course.CourseID;
+                    course.assignedMentors.add(newMent);
+                }
+            }
 
             _CourseEditViewModel.save();
 

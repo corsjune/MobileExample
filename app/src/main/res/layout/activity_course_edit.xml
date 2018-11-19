@@ -139,6 +139,46 @@
                     android:textSize="18sp" />
             </android.support.design.widget.TextInputLayout>
 
+            <TextView
+                android:layout_marginTop="@dimen/big_padding"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Available Mentors for this Course"
+                android:editable="false"
+                android:clickable="false"
+                android:textSize="18sp"
+                android:layout_marginBottom="@dimen/big_padding" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="#000000" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvCourseMentors"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:layout_marginTop="@dimen/big_padding"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Available Assessments for this Course"
+                android:editable="false"
+                android:clickable="false"
+                android:textSize="18sp"
+                android:layout_marginBottom="@dimen/big_padding" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="#000000" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvCourseAssessments"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
             <Button
                 android:id="@+id/button_save"
                 android:layout_width="match_parent"

@@ -1,6 +1,9 @@
 package edu.wgu.dmass13.c196.view.assessment;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,6 +22,7 @@ import edu.wgu.dmass13.c196.globals.Enums;
 import edu.wgu.dmass13.c196.globals.Helpers;
 import edu.wgu.dmass13.c196.model.entity.Assessment;
 import edu.wgu.dmass13.c196.model.entity.Term;
+import edu.wgu.dmass13.c196.notification.C196Receiver;
 import edu.wgu.dmass13.c196.view.BaseActivity;
 import edu.wgu.dmass13.c196.viewmodel.assessment.AssessmentEditViewModel;
 
@@ -51,13 +55,18 @@ public class AssessmentEditActivity extends BaseActivity {
 
         _AssessmentEditViewModel = ViewModelProviders.of(this).get(AssessmentEditViewModel.class);
 
-        Intent intent = getIntent();
-        Bundle bundle = intent.getExtras();
-        Assessment assessment = (bundle == null ? null : (Assessment) bundle.getSerializable(AssessmentEditActivity.CURRENT_ASSESSMENT));
+        if (_AssessmentEditViewModel.getAssessment() == null) {
+            Intent intent = getIntent();
+            Bundle bundle = intent.getExtras();
+            Assessment assessment = (bundle == null ? null : (Assessment) bundle.getSerializable(AssessmentEditActivity.CURRENT_ASSESSMENT));
 
-        if (assessment != null) {
-            _AssessmentEditViewModel.setAssessment(assessment);
+            if (assessment != null) {
+                _AssessmentEditViewModel.setAssessment(assessment);
+            } else {
+                _AssessmentEditViewModel.setAssessment(new Assessment());
+            }
         }
+
         PopulateUI();
     }
 
@@ -103,6 +112,21 @@ public class AssessmentEditActivity extends BaseActivity {
         });
     }
 
+    public void CreateNotification(Assessment x) {
+        String message = "You had a goal set for Assessment " + x.Name + " at " + Helpers.ConvertDateToString(x.GoalDate);
+
+        Intent intent = new Intent(AssessmentEditActivity.this, C196Receiver.class);
+
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(C196Receiver.C196RECEIVER_INTENT, (Serializable) message);
+        intent.putExtras(bundle);
+
+        PendingIntent sender = PendingIntent.getBroadcast(AssessmentEditActivity.this, 0, intent, 0);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 1000, sender);
+
+    }
+
     public void SaveAssessment() {
         Intent replyIntent = new Intent();
         if (TextUtils.isEmpty(_assessmentName.getText())) {
@@ -136,11 +160,21 @@ public class AssessmentEditActivity extends BaseActivity {
 
             //_AssessmentEditViewModel.getAssessment().EndDate = GetDateValueFromEditText(mEditTermEndDate);
             _AssessmentEditViewModel.save();
-
+            CreateNotification(currentAssessment);
             setResult(RESULT_OK, replyIntent);
         }
         finish();
     }
 
+    private void dpAction() {
+        /*
+        LocalDate localDate = dp.getValue();
+        Date date=java.sql.Date.valueOf(localDate);
+        Calendar calendar=Calendar.getInstance();
+        calendar.setTime(date);
+        Long mill=calendar.getTimeInMillis();
+        millis.setText(mill.toString());
+        */
+    }
 
 }

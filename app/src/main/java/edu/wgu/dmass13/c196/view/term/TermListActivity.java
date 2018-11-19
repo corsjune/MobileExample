@@ -20,6 +20,7 @@ import java.util.List;
 import edu.wgu.dmass13.c196.R;
 import edu.wgu.dmass13.c196.globals.Enums;
 import edu.wgu.dmass13.c196.model.entity.Term;
+import edu.wgu.dmass13.c196.model.entity.TermCourse;
 import edu.wgu.dmass13.c196.view.BaseActivity;
 import edu.wgu.dmass13.c196.view.term.components.TermListAdapter;
 import edu.wgu.dmass13.c196.viewmodel.term.TermListViewModel;
@@ -84,7 +85,6 @@ public class TermListActivity extends BaseActivity {
 
                             public void onClick(DialogInterface dialog, int whichButton) {
                                 deleteTerm(term);
-                                Toast.makeText(TermListActivity.this, describer + " was deleted!", Toast.LENGTH_SHORT).show();
                                 adapter.notifyDataSetChanged();
                             }
                         })
@@ -124,8 +124,16 @@ public class TermListActivity extends BaseActivity {
         startActivityForResult(intent, Enums.ActivityActionTypes.Term_Edit);
     }
 
-    public void deleteTerm(Term term) {
-        _TermListViewModel.deleteTerm(term.TermID);
+    public boolean deleteTerm(Term term) {
+
+        if (term.SelectedCourses.size() > 0) {
+            Toast.makeText(TermListActivity.this, "You must unassign all assigned courses before you can delete this term!", Toast.LENGTH_SHORT).show();
+            return false;
+        } else {
+            _TermListViewModel.deleteTerm(term.TermID);
+            Toast.makeText(TermListActivity.this, term.Title + " was deleted!", Toast.LENGTH_SHORT).show();
+            return true;
+        }
     }
 
 

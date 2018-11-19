@@ -81,6 +81,7 @@ public abstract class TermDAO {
 
     }
 
+
     @Query("select * from term")
     public abstract LiveData<List<Term>> _getAllTerms();
 

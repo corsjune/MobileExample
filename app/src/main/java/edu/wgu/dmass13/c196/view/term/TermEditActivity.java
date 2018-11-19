@@ -1,45 +1,30 @@
 package edu.wgu.dmass13.c196.view.term;
 
-import android.app.DatePickerDialog;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
-import android.util.SparseLongArray;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 
-import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import android.support.v4.util.LongSparseArray;
 
 import edu.wgu.dmass13.c196.R;
-import edu.wgu.dmass13.c196.globals.Enums;
 import edu.wgu.dmass13.c196.globals.Helpers;
 import edu.wgu.dmass13.c196.model.entity.Course;
 import edu.wgu.dmass13.c196.model.entity.Term;
 import edu.wgu.dmass13.c196.model.entity.TermCourse;
 import edu.wgu.dmass13.c196.view.BaseActivity;
-import edu.wgu.dmass13.c196.view.term.components.MyRecyclerViewAdapter;
 import edu.wgu.dmass13.c196.view.term.components.TermCourseListAdapter;
-import edu.wgu.dmass13.c196.view.term.components.TermListAdapter;
 import edu.wgu.dmass13.c196.viewmodel.term.TermEditViewModel;
-import edu.wgu.dmass13.c196.viewmodel.term.TermListViewModel;
 
 public class TermEditActivity extends BaseActivity {
 
@@ -61,13 +46,19 @@ public class TermEditActivity extends BaseActivity {
 
         _TermEditViewModel = ViewModelProviders.of(this).get(TermEditViewModel.class);
 
-        Intent intent = getIntent();
-        Bundle bundle = intent.getExtras();
-        //get any passed in term from the intent
-        Term term = (bundle == null ? null : (Term) bundle.getSerializable(TermEditActivity.CURRENT_TERM));
-        //if term was passed in , set the viewmodel
-        if (term != null) {
-            _TermEditViewModel.setTerm(term);
+        if (_TermEditViewModel.getTerm() == null) {
+
+            Intent intent = getIntent();
+            Bundle bundle = intent.getExtras();
+            //get any passed in term from the intent
+            Term term = (bundle == null ? null : (Term) bundle.getSerializable(TermEditActivity.CURRENT_TERM));
+            //if term was passed in , set the viewmodel
+            if (term != null) {
+                _TermEditViewModel.setTerm(term);
+            } else {
+                _TermEditViewModel.setTerm(new Term());
+            }
+
         }
 
         PopulateUI();

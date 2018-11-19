@@ -37,12 +37,16 @@ public class MentorEditActivity extends BaseActivity {
 
         _MentorEditViewModel = ViewModelProviders.of(this).get(MentorEditViewModel.class);
 
-        Intent intent = getIntent();
-        Bundle bundle = intent.getExtras();
-        Mentor mentor = (bundle == null ? null : (Mentor) bundle.getSerializable(MentorEditActivity.CURRENT_MENTOR));
+        if (_MentorEditViewModel.getMentor() == null) {
+            Intent intent = getIntent();
+            Bundle bundle = intent.getExtras();
+            Mentor mentor = (bundle == null ? null : (Mentor) bundle.getSerializable(MentorEditActivity.CURRENT_MENTOR));
 
-        if (mentor != null) {
-            _MentorEditViewModel.setMentor(mentor);
+            if (mentor != null) {
+                _MentorEditViewModel.setMentor(mentor);
+            } else {
+                _MentorEditViewModel.setMentor(new Mentor());
+            }
         }
 
         PopulateUI();

@@ -17,15 +17,15 @@ import edu.wgu.dmass13.c196.model.repository.TermRepository;
 public class TermEditViewModel extends AndroidViewModel {
 
     private TermRepository _repository;
-    private Term _currentTerm = new Term();
+    private Term _currentTerm;
     private LiveData<List<Course>> _allCourses;
 
     public LongSparseArray<Boolean> getCourseCheckState() {
         return _courseCheckState;
     }
 
-    public void setCourseCheckState(LongSparseArray<Boolean> _courseCheckState) {
-        this._courseCheckState = _courseCheckState;
+    public void setCourseCheckState(LongSparseArray<Boolean> courseCheckState) {
+        this._courseCheckState = courseCheckState;
     }
 
     private LongSparseArray<Boolean> _courseCheckState = new LongSparseArray<Boolean>();

@@ -12,7 +12,7 @@ import edu.wgu.dmass13.c196.model.repository.MentorRepository;
 public class MentorEditViewModel extends AndroidViewModel {
 
     private MentorRepository _repository;
-    private Mentor _currentMentor = new Mentor();
+    private Mentor _currentMentor;
 
 
     public MentorEditViewModel(Application application) {

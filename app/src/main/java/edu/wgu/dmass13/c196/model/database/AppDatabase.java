@@ -6,8 +6,8 @@ import edu.wgu.dmass13.c196.model.entity.*;
 import edu.wgu.dmass13.c196.model.dao.*;
 import edu.wgu.dmass13.c196.model.typeConverter.*;
 
-@Database(entities = {Assessment.class, Course.class, Mentor.class, Term.class, TermCourse.class
-}, version = 9, exportSchema = false)
+@Database(entities = {Assessment.class, Course.class, Mentor.class, Term.class, TermCourse.class, CourseAssessment.class, CourseMentor.class
+}, version = 14, exportSchema = false)
 @TypeConverters({Converters.class})
 public abstract class AppDatabase extends RoomDatabase {
 

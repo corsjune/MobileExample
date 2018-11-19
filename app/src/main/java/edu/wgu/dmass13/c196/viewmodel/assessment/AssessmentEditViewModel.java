@@ -9,7 +9,7 @@ import edu.wgu.dmass13.c196.model.repository.AssessmentRepository;
 public class AssessmentEditViewModel extends AndroidViewModel {
 
     private AssessmentRepository _repository;
-    private Assessment _currentAssessment = new Assessment();
+    private Assessment _currentAssessment;
 
 
     public AssessmentEditViewModel(Application application) {

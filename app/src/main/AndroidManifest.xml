@@ -19,6 +19,7 @@
             android:label="@string/title_activity_home">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -86,6 +87,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="edu.wgu.dmass13.c196.view.term.TermListActivity" />
         </activity>
+
+        <receiver
+            android:name=".notification.C196Receiver"
+            android:enabled="true"
+            android:exported="true"></receiver>
     </application>
 
 </manifest>

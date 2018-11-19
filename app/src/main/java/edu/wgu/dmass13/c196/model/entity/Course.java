@@ -4,7 +4,9 @@ import android.arch.persistence.room.*;
 
 import java.io.Serializable;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import edu.wgu.dmass13.c196.globals.Enums;
 
@@ -27,5 +29,11 @@ public class Course implements Serializable {
     public boolean EndDateAlert;
 
     public String Notes;
+
+    @Ignore
+    public List<CourseMentor> assignedMentors = new ArrayList<CourseMentor>();
+
+    @Ignore
+    public List<CourseAssessment> assignedAssignments = new ArrayList<CourseAssessment>();
 
 }

@@ -7,13 +7,15 @@ import android.arch.persistence.room.PrimaryKey;
 
 import java.io.Serializable;
 
+import static android.arch.persistence.room.ForeignKey.CASCADE;
+
 @Entity(foreignKeys = {
         @ForeignKey(entity = Course.class,
                 parentColumns = "CourseID",
-                childColumns = "CourseID"),
+                childColumns = "CourseID", onDelete = CASCADE),
         @ForeignKey(entity = Term.class,
                 parentColumns = "TermID",
-                childColumns = "TermID")},
+                childColumns = "TermID", onDelete = CASCADE)},
         indices = {@Index("TermID"), @Index("CourseID")
 })
 public class TermCourse implements Serializable {
