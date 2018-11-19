@@ -1,9 +1,12 @@
 package edu.wgu.dmass13.c196.view;
 
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +17,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -22,6 +26,8 @@ import java.util.Locale;
 import edu.wgu.dmass13.c196.R;
 import edu.wgu.dmass13.c196.globals.Enums;
 import edu.wgu.dmass13.c196.globals.Helpers;
+import edu.wgu.dmass13.c196.notification.C196Receiver;
+import edu.wgu.dmass13.c196.view.assessment.AssessmentEditActivity;
 import edu.wgu.dmass13.c196.view.term.TermListActivity;
 
 public class BaseActivity extends AppCompatActivity {
@@ -61,19 +67,45 @@ public class BaseActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case Enums.MenuValues.INFO:
-
-                new AlertDialog.Builder(BaseActivity.this)
-                        .setTitle("WGU 196")
-                        .setMessage("Hello")
-                        .setIcon(android.R.drawable.ic_dialog_info)
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int whichButton) {
-                            }
-                        })
-                        .show();
+                Alert("Hello");
                 break;
         }
         return false;
+    }
+
+    public void Alert(String Message) {
+        new AlertDialog.Builder(BaseActivity.this)
+                .setTitle("WGU 196")
+                .setMessage(Message)
+                .setIcon(android.R.drawable.ic_dialog_info)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                    }
+                })
+                .show();
+    }
+
+
+    public void CreateNotification(String message, Date alarmDate) {
+
+        //https://stackoverflow.com/questions/7370324/notification-passes-old-intent-extras
+
+        Intent intent = new Intent(BaseActivity.this, C196Receiver.class);
+
+        Long mils = Helpers.ConvertDateToLong(alarmDate);
+
+        if (mils != null) {
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(C196Receiver.C196RECEIVER_INTENT, (Serializable) message);
+            intent.putExtras(bundle);
+
+
+            int iUniqueId = (int) (System.currentTimeMillis() & 0xfffffff);
+
+            PendingIntent sender = PendingIntent.getBroadcast(BaseActivity.this, iUniqueId, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+            alarmManager.set(AlarmManager.RTC_WAKEUP, mils, sender);
+        }
     }
 
 

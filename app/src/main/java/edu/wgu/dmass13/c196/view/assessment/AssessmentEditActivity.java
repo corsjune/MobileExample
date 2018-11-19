@@ -16,6 +16,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import edu.wgu.dmass13.c196.R;
 import edu.wgu.dmass13.c196.globals.Enums;
@@ -112,20 +113,6 @@ public class AssessmentEditActivity extends BaseActivity {
         });
     }
 
-    public void CreateNotification(Assessment x) {
-        String message = "You had a goal set for Assessment " + x.Name + " at " + Helpers.ConvertDateToString(x.GoalDate);
-
-        Intent intent = new Intent(AssessmentEditActivity.this, C196Receiver.class);
-
-        Bundle bundle = new Bundle();
-        bundle.putSerializable(C196Receiver.C196RECEIVER_INTENT, (Serializable) message);
-        intent.putExtras(bundle);
-
-        PendingIntent sender = PendingIntent.getBroadcast(AssessmentEditActivity.this, 0, intent, 0);
-        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 1000, sender);
-
-    }
 
     public void SaveAssessment() {
         Intent replyIntent = new Intent();
@@ -160,21 +147,16 @@ public class AssessmentEditActivity extends BaseActivity {
 
             //_AssessmentEditViewModel.getAssessment().EndDate = GetDateValueFromEditText(mEditTermEndDate);
             _AssessmentEditViewModel.save();
-            CreateNotification(currentAssessment);
+
+
+            if (currentAssessment.GoalAlert) {
+                String Message = "You had a goal set for Assessment " + currentAssessment.Name + " at " + Helpers.ConvertDateToString(currentAssessment.GoalDate);
+                CreateNotification(Message, currentAssessment.GoalDate);
+            }
             setResult(RESULT_OK, replyIntent);
         }
         finish();
     }
 
-    private void dpAction() {
-        /*
-        LocalDate localDate = dp.getValue();
-        Date date=java.sql.Date.valueOf(localDate);
-        Calendar calendar=Calendar.getInstance();
-        calendar.setTime(date);
-        Long mill=calendar.getTimeInMillis();
-        millis.setText(mill.toString());
-        */
-    }
 
 }

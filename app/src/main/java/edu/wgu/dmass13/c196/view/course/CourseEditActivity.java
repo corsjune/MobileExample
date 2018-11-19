@@ -265,6 +265,17 @@ public class CourseEditActivity extends BaseActivity {
 
             _CourseEditViewModel.save();
 
+            if (course.StartDateAlert) {
+                String Message = "You had a goal set for the course start date of  " + course.CourseTitle + " at " + Helpers.ConvertDateToString(course.StartDate);
+                CreateNotification(Message, course.StartDate);
+            }
+
+            if (course.EndDateAlert) {
+                String Message = "You had a goal set for the course end date of " + course.CourseTitle + " at " + Helpers.ConvertDateToString(course.EndDate);
+                CreateNotification(Message, course.EndDate);
+            }
+
+
             setResult(RESULT_OK, replyIntent);
         }
         finish();

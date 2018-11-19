@@ -1,6 +1,7 @@
 package edu.wgu.dmass13.c196.globals;
 
 import java.text.ParseException;
+import java.util.Calendar;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
@@ -32,5 +33,18 @@ public class Helpers {
         }
     }
 
+    public static Long ConvertDateToLong(Date input) {
+
+        Long returnValue;
+
+        if (input != null) {
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(input);
+            returnValue = calendar.getTimeInMillis();
+            return returnValue;
+        } else {
+            return null;
+        }
+    }
 
 }
