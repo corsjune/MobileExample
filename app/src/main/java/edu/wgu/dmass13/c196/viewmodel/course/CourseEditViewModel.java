@@ -12,7 +12,6 @@ import edu.wgu.dmass13.c196.model.entity.Course;
 import edu.wgu.dmass13.c196.model.entity.CourseAssessment;
 import edu.wgu.dmass13.c196.model.entity.CourseMentor;
 import edu.wgu.dmass13.c196.model.entity.Mentor;
-import edu.wgu.dmass13.c196.model.entity.TermCourse;
 import edu.wgu.dmass13.c196.model.repository.AssessmentRepository;
 import edu.wgu.dmass13.c196.model.repository.CourseRepository;
 import edu.wgu.dmass13.c196.model.repository.MentorRepository;

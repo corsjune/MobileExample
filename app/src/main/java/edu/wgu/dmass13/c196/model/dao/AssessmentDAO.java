@@ -26,4 +26,5 @@ public interface AssessmentDAO {
     @Query("delete from assessment where assessmentid = :assessmentId")
     void deleteAssessment(long assessmentId);
 
+
 }

@@ -1,6 +1,5 @@
 package edu.wgu.dmass13.c196.view;
 
-import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.DatePickerDialog;
 import android.app.PendingIntent;
@@ -14,21 +13,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 
 import edu.wgu.dmass13.c196.R;
 import edu.wgu.dmass13.c196.globals.Enums;
 import edu.wgu.dmass13.c196.globals.Helpers;
 import edu.wgu.dmass13.c196.notification.C196Receiver;
-import edu.wgu.dmass13.c196.view.assessment.AssessmentEditActivity;
-import edu.wgu.dmass13.c196.view.term.TermListActivity;
 
 public class BaseActivity extends AppCompatActivity {
 
@@ -61,13 +54,18 @@ public class BaseActivity extends AppCompatActivity {
         return true;
     }
 
+    protected String getHelpInfo()
+    {
+        return "Hello";
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
 
         switch (item.getItemId()) {
             case Enums.MenuValues.INFO:
-                Alert("Hello");
+                Alert(getHelpInfo());
                 break;
         }
         return false;

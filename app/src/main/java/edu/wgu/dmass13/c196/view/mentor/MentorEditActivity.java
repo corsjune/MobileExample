@@ -1,9 +1,7 @@
 package edu.wgu.dmass13.c196.view.mentor;
 
-import android.app.ActionBar;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -11,7 +9,6 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import edu.wgu.dmass13.c196.R;
-import edu.wgu.dmass13.c196.globals.Helpers;
 import edu.wgu.dmass13.c196.model.entity.Mentor;
 import edu.wgu.dmass13.c196.view.BaseActivity;
 import edu.wgu.dmass13.c196.viewmodel.mentor.MentorEditViewModel;
@@ -24,6 +21,12 @@ public class MentorEditActivity extends BaseActivity {
     private EditText _mentorPhone;
     private EditText _mentorEmail;
 
+    @Override
+    protected String getHelpInfo()
+    {
+        final String type = "mentor";
+        return "Complete the fields for this " + type + " and click save. ";
+    }
 
     @Override
     protected int getContentView() {
@@ -61,9 +64,9 @@ public class MentorEditActivity extends BaseActivity {
         _mentorName = findViewById(R.id.mentor_edit_name);
         _mentorPhone = findViewById(R.id.mentor_edit_phone);
 
-        _mentorEmail.setText(mentor.Email != null ? mentor.Email : null);
-        _mentorName.setText(mentor.Name != null ? mentor.Name : null);
-        _mentorPhone.setText(mentor.PhoneNumber != null ? mentor.PhoneNumber : null);
+        _mentorEmail.setText(mentor.Email);
+        _mentorName.setText(mentor.Name);
+        _mentorPhone.setText(mentor.PhoneNumber);
 
         final Button button = findViewById(R.id.button_save);
         button.setOnClickListener(new View.OnClickListener() {

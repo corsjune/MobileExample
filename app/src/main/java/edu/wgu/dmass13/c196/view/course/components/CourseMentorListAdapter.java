@@ -12,7 +12,6 @@ import android.widget.CompoundButton;
 import java.util.List;
 
 import edu.wgu.dmass13.c196.R;
-import edu.wgu.dmass13.c196.model.entity.Course;
 import edu.wgu.dmass13.c196.model.entity.Mentor;
 
 public class CourseMentorListAdapter extends RecyclerView.Adapter<CourseMentorListAdapter.CourseMentorViewHolder> {

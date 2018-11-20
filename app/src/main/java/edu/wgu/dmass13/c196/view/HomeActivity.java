@@ -1,13 +1,8 @@
 package edu.wgu.dmass13.c196.view;
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
-import android.app.Activity;
-import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
 import android.view.View;
-import android.widget.Toolbar;
 
 import edu.wgu.dmass13.c196.R;
 import edu.wgu.dmass13.c196.globals.Enums;
@@ -21,6 +16,12 @@ public class HomeActivity extends BaseActivity {
     @Override
     protected int getContentView() {
         return R.layout.activity_home;
+    }
+
+    @Override
+    protected String getHelpInfo()
+    {
+        return "Click this button for help on any future screen. Click any button below to continue!";
     }
 
     @Override

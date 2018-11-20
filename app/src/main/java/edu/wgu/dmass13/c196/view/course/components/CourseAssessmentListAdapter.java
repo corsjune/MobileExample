@@ -13,8 +13,6 @@ import java.util.List;
 
 import edu.wgu.dmass13.c196.R;
 import edu.wgu.dmass13.c196.model.entity.Assessment;
-import edu.wgu.dmass13.c196.model.entity.Course;
-import edu.wgu.dmass13.c196.model.entity.CourseAssessment;
 
 public class CourseAssessmentListAdapter extends RecyclerView.Adapter<CourseAssessmentListAdapter.CourseAssessmentViewHolder> {
 

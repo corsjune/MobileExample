@@ -29,6 +29,13 @@ public class CourseListActivity extends BaseActivity {
     //private AppDatabase database;
     private CourseListViewModel _CourseListViewModel;
 
+    @Override
+    protected String getHelpInfo()
+    {
+        final String type = "course";
+        return "Click on a " + type + " to edit. Swipe left or right to delete. Click on the plus button to create a new " + type;
+    }
+
     public static final int NEW_COURSE_ACTIVITY_REQUEST_CODE = 1;
 
     @Override

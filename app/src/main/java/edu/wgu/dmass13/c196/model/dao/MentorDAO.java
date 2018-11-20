@@ -5,6 +5,7 @@ import android.arch.persistence.room.*;
 
 import java.util.List;
 
+import edu.wgu.dmass13.c196.model.entity.Course;
 import edu.wgu.dmass13.c196.model.entity.Mentor;
 
 @Dao
@@ -26,4 +27,6 @@ public interface MentorDAO {
     @Query("delete from mentor where mentorid = :mentorId")
     void deleteMentor(long mentorId);
 
+    @Insert
+    void _insertAll(Mentor... mentors);
 }

@@ -4,8 +4,6 @@ import android.arch.persistence.room.*;
 
 import java.io.Serializable;
 
-import edu.wgu.dmass13.c196.utilities.StringUtility;
-
 @Entity
 public class Mentor implements Serializable {
 

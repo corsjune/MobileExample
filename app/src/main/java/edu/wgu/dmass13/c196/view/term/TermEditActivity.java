@@ -41,6 +41,13 @@ public class TermEditActivity extends BaseActivity {
 
 
     @Override
+    protected String getHelpInfo()
+    {
+        final String type = "term";
+        return "Complete the fields for this " + type + " and click save. Click on any relevant courses that should be associated with this " + type;
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -73,7 +80,7 @@ public class TermEditActivity extends BaseActivity {
         Term term = _TermEditViewModel.getTerm();
 
         mEditTermTitle = findViewById(R.id.term_edit_title);
-        mEditTermTitle.setText(term.Title != null ? term.Title : null);
+        mEditTermTitle.setText(term.Title);
 
         mEditTermStartDate = findViewById(R.id.term_edit_StartDate);
         mEditTermStartDate.setText(Helpers.ConvertDateToString(term.StartDate));

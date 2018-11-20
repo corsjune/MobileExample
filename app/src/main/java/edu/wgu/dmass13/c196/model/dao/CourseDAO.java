@@ -125,4 +125,6 @@ public abstract class CourseDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     public abstract void _createCourseAssessment(CourseAssessment ca);
+
+
 }

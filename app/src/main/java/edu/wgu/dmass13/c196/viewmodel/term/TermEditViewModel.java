@@ -5,7 +5,6 @@ import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.support.v4.util.LongSparseArray;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import edu.wgu.dmass13.c196.model.entity.Course;
@@ -19,6 +18,9 @@ public class TermEditViewModel extends AndroidViewModel {
     private TermRepository _repository;
     private Term _currentTerm;
     private LiveData<List<Course>> _allCourses;
+
+
+
 
     public LongSparseArray<Boolean> getCourseCheckState() {
         return _courseCheckState;

@@ -2,9 +2,6 @@ package edu.wgu.dmass13.c196.viewmodel.mentor;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
-import android.arch.lifecycle.LiveData;
-
-import java.util.List;
 
 import edu.wgu.dmass13.c196.model.entity.Mentor;
 import edu.wgu.dmass13.c196.model.repository.MentorRepository;

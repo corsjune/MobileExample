@@ -20,7 +20,6 @@ import java.util.List;
 import edu.wgu.dmass13.c196.R;
 import edu.wgu.dmass13.c196.globals.Enums;
 import edu.wgu.dmass13.c196.model.entity.Term;
-import edu.wgu.dmass13.c196.model.entity.TermCourse;
 import edu.wgu.dmass13.c196.view.BaseActivity;
 import edu.wgu.dmass13.c196.view.term.components.TermListAdapter;
 import edu.wgu.dmass13.c196.viewmodel.term.TermListViewModel;
@@ -122,6 +121,13 @@ public class TermListActivity extends BaseActivity {
         }
 
         startActivityForResult(intent, Enums.ActivityActionTypes.Term_Edit);
+    }
+
+    @Override
+    protected String getHelpInfo()
+    {
+        final String type = "term";
+        return "Click on a " + type + " to edit. Swipe left or right to delete. Click on the plus button to create a new " + type;
     }
 
     public boolean deleteTerm(Term term) {

@@ -6,7 +6,6 @@ import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import static android.arch.persistence.room.ForeignKey.CASCADE;
 

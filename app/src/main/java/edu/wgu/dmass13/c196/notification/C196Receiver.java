@@ -12,8 +12,6 @@ import android.support.v4.app.NotificationCompat;
 import android.widget.Toast;
 
 import edu.wgu.dmass13.c196.R;
-import edu.wgu.dmass13.c196.model.entity.Assessment;
-import edu.wgu.dmass13.c196.view.assessment.AssessmentEditActivity;
 
 import static android.content.Context.NOTIFICATION_SERVICE;
 

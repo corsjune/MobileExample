@@ -32,15 +32,6 @@
                 android:src="@drawable/wgu_national_desktop_logo" />
 
 
-            <TextView
-                android:id="@+id/txtDirections"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="45dp"
-                android:gravity="center_horizontal|center"
-                android:text="Click a button below to get started!" />
-
             <Button
                 android:id="@+id/cmdAssessment"
                 android:layout_width="match_parent"
@@ -77,6 +68,8 @@
                 android:layout_marginBottom="2dp"
                 android:onClick="cmdTerm_OnClick"
                 android:text="View / Edit Terms" />
+
+
         </LinearLayout>
 
 

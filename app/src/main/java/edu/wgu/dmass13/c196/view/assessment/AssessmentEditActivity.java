@@ -1,29 +1,19 @@
 package edu.wgu.dmass13.c196.view.assessment;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
-
-import java.io.Serializable;
-import java.util.Date;
 
 import edu.wgu.dmass13.c196.R;
 import edu.wgu.dmass13.c196.globals.Enums;
 import edu.wgu.dmass13.c196.globals.Helpers;
 import edu.wgu.dmass13.c196.model.entity.Assessment;
-import edu.wgu.dmass13.c196.model.entity.Term;
-import edu.wgu.dmass13.c196.notification.C196Receiver;
 import edu.wgu.dmass13.c196.view.BaseActivity;
 import edu.wgu.dmass13.c196.viewmodel.assessment.AssessmentEditViewModel;
 
@@ -49,6 +39,14 @@ public class AssessmentEditActivity extends BaseActivity {
     protected int getContentView() {
         return R.layout.activity_assessment_edit;
     }
+
+    @Override
+    protected String getHelpInfo()
+    {
+        final String type = "assessment";
+        return "Complete the fields for this " + type + " and click save. Check any alerts that you desire to be created for this assessment." ;
+    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -80,7 +78,7 @@ public class AssessmentEditActivity extends BaseActivity {
 
 
         _assessmentName = findViewById(R.id.assessment_edit_name);
-        _assessmentName.setText(assessment.Name != null ? assessment.Name : null);
+        _assessmentName.setText(assessment.Name);
 
         _assessmentDate = findViewById(R.id.assessment_edit_date);
         _assessmentDate.setText(Helpers.ConvertDateToString(assessment.AssessmentDate));

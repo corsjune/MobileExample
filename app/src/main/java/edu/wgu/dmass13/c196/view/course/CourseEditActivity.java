@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v4.util.LongSparseArray;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,9 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.RadioGroup;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,13 +29,10 @@ import edu.wgu.dmass13.c196.model.entity.Course;
 import edu.wgu.dmass13.c196.model.entity.CourseAssessment;
 import edu.wgu.dmass13.c196.model.entity.CourseMentor;
 import edu.wgu.dmass13.c196.model.entity.Mentor;
-import edu.wgu.dmass13.c196.model.entity.TermCourse;
 import edu.wgu.dmass13.c196.view.BaseActivity;
 import edu.wgu.dmass13.c196.view.course.components.CourseAssessmentListAdapter;
 import edu.wgu.dmass13.c196.view.course.components.CourseMentorListAdapter;
-import edu.wgu.dmass13.c196.view.term.components.TermCourseListAdapter;
 import edu.wgu.dmass13.c196.viewmodel.course.CourseEditViewModel;
-import edu.wgu.dmass13.c196.viewmodel.course.CourseListViewModel;
 
 public class CourseEditActivity extends BaseActivity {
 
@@ -55,6 +49,12 @@ public class CourseEditActivity extends BaseActivity {
 
     // private static final int MENU_LOGOUT = MENU.FIRST + 4;
 
+    @Override
+    protected String getHelpInfo()
+    {
+        final String type = "course";
+        return "Complete the fields for this " + type + " and click save. Check any alerts that you desire to be created for this course. Click the share button in the toolbar to share notes. Click on any relevant mentors or assessments that should be associated with this " + type;
+    }
 
     @Override
     protected int getContentView() {
@@ -88,10 +88,10 @@ public class CourseEditActivity extends BaseActivity {
         Course course = _CourseEditViewModel.getCourse();
 
         _title = findViewById(R.id.course_edit_title);
-        _title.setText(course.CourseTitle != null ? course.CourseTitle : null);
+        _title.setText(course.CourseTitle);
 
         _status = findViewById(R.id.course_edit_status);
-        _status.setText(course.Status != null ? course.Status : null);
+        _status.setText(course.Status);
 
         _startDate = findViewById(R.id.course_edit_startdate);
         _startDate.setText(Helpers.ConvertDateToString(course.StartDate));
@@ -108,7 +108,7 @@ public class CourseEditActivity extends BaseActivity {
         _endDateAlert.setChecked(course.EndDateAlert);
 
         _notes = findViewById(R.id.course_edit_notes);
-        _notes.setText(course.Notes != null ? course.Notes : null);
+        _notes.setText(course.Notes);
 
         final Button button = findViewById(R.id.button_save);
         button.setOnClickListener(new View.OnClickListener() {

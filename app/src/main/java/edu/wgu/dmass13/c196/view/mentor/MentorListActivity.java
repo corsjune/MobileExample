@@ -31,6 +31,12 @@ public class MentorListActivity extends BaseActivity {
 
     public static final int NEW_MENTOR_ACTIVITY_REQUEST_CODE = 1;
 
+    @Override
+    protected String getHelpInfo()
+    {
+        final String type = "mentor";
+        return "Click on a " + type + " to edit. Swipe left or right to delete. Click on the plus button to create a new " + type;
+    }
 
     @Override
     protected int getContentView() {

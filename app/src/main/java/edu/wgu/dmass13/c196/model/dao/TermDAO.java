@@ -1,14 +1,13 @@
 package edu.wgu.dmass13.c196.model.dao;
 
 import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.Transformations;
 import android.arch.persistence.room.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.wgu.dmass13.c196.model.entity.Assessment;
+import edu.wgu.dmass13.c196.model.entity.Mentor;
 import edu.wgu.dmass13.c196.model.entity.Term;
 import edu.wgu.dmass13.c196.model.entity.TermCourse;
 
@@ -105,5 +104,7 @@ public abstract class TermDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     public abstract void _createTermCourse(TermCourse term);
+
+
 }
 
